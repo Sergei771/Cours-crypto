@@ -3,205 +3,1054 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation - TeaRoom: Shadows</title>
-    <link rel="icon" href="assets/images/favicon.ico">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/typography.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/dark-mode.css">
-    <link rel="stylesheet" href="vendor/prism.css">
+    <title>TeaRoom : Shadows - Présentation du Projet</title>
+    
+    <!-- TailwindCSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
     <style>
-        /* Styles spécifiques (optionnels) pour la page de présentation */
-        .presentation-content {
-            max-width: 1000px; /* Légèrement plus large ? */
-            margin: 2rem auto; /* Centrer */
-            padding: 1rem 2rem;
+        :root {
+            --tea-green: #8db596;
+            --tea-brown: #6a4626;
+            --tea-gold: #d9a566;
+            --tea-light: #f1efe7;
+            --tea-dark: #1a1a1a;
+            --tea-purple: #7e5a9b;
+            --tea-bg: #121212;
         }
-        .presentation-content section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--tea-bg);
+            color: var(--tea-light);
+            line-height: 1.6;
         }
-        .presentation-content section:last-child {
-            border-bottom: none;
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
         }
-        .code-explanation {
-            font-size: 0.9em;
-            margin-top: -0.5rem;
+        
+        .section-container {
+            padding: 4rem 0;
+            min-height: auto;
+        }
+        
+        .tea-accent {
+            color: var(--tea-green);
+        }
+        
+        .tea-accent-gold {
+            color: var(--tea-gold);
+        }
+        
+        .tea-accent-purple {
+            color: var(--tea-purple);
+        }
+        
+        .btn-tea {
+            background-color: var(--tea-green);
+            color: var(--tea-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-tea:hover {
+            background-color: var(--tea-gold);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--tea-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .card {
+            background-color: rgba(26, 26, 26, 0.7);
+            border-left: 3px solid var(--tea-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            color: var(--tea-gold);
+            font-size: 2rem;
             margin-bottom: 1rem;
-            color: var(--text-primary);
-            opacity: 0.8;
-            padding-left: 1rem;
         }
-        .presentation-content h2 {
-             border-bottom: 2px solid var(--accent-color);
-             padding-bottom: 0.5rem;
-             margin-bottom: 1.5rem;
+        
+        .security-icon {
+            color: var(--tea-purple);
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-         .presentation-content ul li { margin-bottom: 0.75rem; }
-         .presentation-content ul ul { margin-top: 0.5rem; margin-bottom: 0.75rem;}
-
+        
+        .enhancement-icon {
+            color: var(--tea-green);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tea-leaves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: url('https://img.freepik.com/premium-vector/green-tea-leaves-seamless-pattern_335399-1533.jpg');
+            background-size: 400px;
+        }
+        
+        .code-display {
+            border-radius: 8px;
+            margin: 20px 0;
+            background-color: #1e1e1e;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid #333;
+        }
+        
+        .code-header {
+            background-color: #2a2a2a;
+            padding: 8px 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        
+        .architecture-diagram {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .diagram-node {
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .connector {
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .connector::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background-color: var(--tea-gold);
+        }
+        
+        .connector i {
+            background-color: var(--tea-bg);
+            padding: 0 5px;
+            z-index: 1;
+            color: var(--tea-gold);
+        }
+        
+        .security-card {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-left: 3px solid var(--tea-purple);
+        }
+        
+        .improvement-card {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-left: 3px solid var(--tea-gold);
+        }
+        
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--tea-green);
+        }
+        
+        /* Smooth scrolling and fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--tea-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--tea-green);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--tea-gold);
+        }
+        
+        /* Print optimization */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: white;
+                color: black;
+            }
+            
+            .section-container {
+                page-break-inside: avoid;
+                padding: 2rem 0;
+            }
+            
+            .tea-leaves {
+                display: none;
+            }
+            
+            .card, .security-card, .improvement-card, .architecture-diagram {
+                border: 1px solid #ddd;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="assets/images/logo.svg" alt="TeaRoom: Shadows Logo" class="logo">
-            <h1>Présentation: TeaRoom Shadows</h1>
+    <div class="tea-leaves"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-opacity-90 bg-gray-900 shadow-md z-50 py-4">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <div class="text-xl font-bold">
+                <span class="tea-accent-gold">Tea</span><span class="tea-accent">Room</span> : <span class="tea-accent-purple">Shadows</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a class="nav-link active" data-section="intro">Introduction</a>
+                <a class="nav-link" data-section="context">Contexte</a>
+                <a class="nav-link" data-section="architecture">Architecture</a>
+                <a class="nav-link" data-section="functions">Fonctionnalités</a>
+                <a class="nav-link" data-section="security">Sécurité</a>
+                <a class="nav-link" data-section="improvements">Améliorations</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <i class="fas fa-bars text-white text-2xl"></i>
+                </button>
+            </div>
         </div>
-        <button id="theme-toggle" aria-label="Basculer mode clair/sombre">
-            <span class="light-icon">☀️</span>
-            <span class="dark-icon">🌙</span>
-        </button>
-    </header>
-
-    <main class="presentation-content">
-
-        <section id="pres-intro">
-            <h2>1. Introduction & Contexte (1-2 min)</h2>
-            <ul>
-                <li>Bienvenue ! Présentation de <strong>TeaRoom: Shadows</strong> : Sécurisation Cryptographique.</li>
-                <li><strong>Contexte :</strong> Application Anvil "TeaRoom" (salon de thé).</li>
-                <li><strong>Problème :</strong> Risques Sécurité (RGPD, Données Perso, Fuites). <span style="color: red; font-weight: bold;">Responsabilité Civile !</span></li>
-                <li><strong>Solution :</strong> Notre projet - Focus sur CIA (Confidentialité, Intégrité, Disponibilité).</li>
-                <li><strong>Support :</strong> Cette documentation interactive (Navigation, Thème...).</li>
-            </ul>
-            <p style="text-align: right;"><a href="index.html" target="_blank">Voir l'accueil du site ➡️</a></p>
-        </section>
-
-        <section id="pres-fonctionnalites">
-            <h2>2. Fonctionnalités & Sécurité Utilisateur (3 min)</h2>
-            <p>Comment la sécurité s'intègre aux fonctionnalités vues par l'utilisateur (réponse aux <em>user stories</em> du CDC) :</p>
-            <ul>
-                <li><strong>Inscription/Connexion :</strong>
-                    <ul>
-                        <li>Validation force mot de passe (Client). <em>(Réf Code: <code>SignUpForm.check_password_strength</code>)</em></li>
-                        <li>Protection force brute (Server - 3 essais max). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Rapport]</a> <em>(Réf Code: <code>routes/session/login.py</code>)</em></li>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95 w-full">
+            <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
+                <a class="nav-link active" data-section="intro">Introduction</a>
+                <a class="nav-link" data-section="context">Contexte</a>
+                <a class="nav-link" data-section="architecture">Architecture</a>
+                <a class="nav-link" data-section="functions">Fonctionnalités</a>
+                <a class="nav-link" data-section="security">Sécurité</a>
+                <a class="nav-link" data-section="improvements">Améliorations</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Intro Section -->
+    <section id="intro" class="section-container pt-32">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center justify-center text-center">
+                <h1 class="text-5xl font-bold mb-6">
+                    <span class="tea-accent-gold">Tea</span><span class="tea-accent">Room</span> : <span class="tea-accent-purple">Shadows</span>
+                </h1>
+                <p class="text-xl mb-8 max-w-3xl">
+                    Une application web full-stack pour un salon de thé, intégrant des techniques avancées de sécurisation cryptographique pour protéger les données des utilisateurs.
+                </p>
+                <div class="mb-12">
+                    <span class="px-3 py-1 bg-opacity-20 bg-white rounded mr-2 text-sm">UE 6</span>
+                    <span class="px-3 py-1 bg-opacity-20 bg-white rounded mr-2 text-sm">Cybersécurité</span>
+                    <span class="px-3 py-1 bg-opacity-20 bg-white rounded text-sm">Bachelor 1ère année</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl fade-in">
+                    <div class="card p-6 rounded-lg">
+                        <i class="fas fa-mug-hot feature-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Salon de thé</h3>
+                        <p>Interface client pour explorer les produits, réserver une table ou commander des pâtisseries.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <i class="fas fa-shield-alt security-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Sécurité Avancée</h3>
+                        <p>Implémentation de techniques cryptographiques pour protéger les données sensibles des utilisateurs.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <i class="fas fa-code enhancement-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Full Stack Python</h3>
+                        <p>Application développée en Python avec Flask pour le backend et Anvil pour le frontend.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Context Section -->
+    <section id="context" class="section-container">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 section-heading">Contexte du Projet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 fade-in">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 tea-accent-gold">Le concept TeaRoom</h3>
+                    <p class="mb-6">
+                        TeaRoom est la dénomination sociale d'une entreprise reposant sur un salon de thé. Le "TeaRoom" possède une application web full-stack permettant aux clients de :
+                    </p>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Découvrir leurs produits signatures</li>
+                        <li>Réserver une table pour le midi</li>
+                        <li>Commander des gâteaux et payer sur place</li>
                     </ul>
-                </li>
-                <li><strong>Gestion de Profil & Données :</strong>
-                    <ul>
-                        <li>Modification profil sécurisée (re-auth via mdp). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Rapport]</a> <em>(Réf Code: Client <code>Edit_Profile</code> -> <code>user_controller.verify_password</code>)</em></li>
-                        <li>Stockage sécurisé des photos (BLOBs). <a href="justification-technique.html#protection-donnees" target="_blank">[Pourquoi BLOBs?]</a> <em>(Réf Code: Server <code>db.py</code>, <code>process_image</code>)</em></li>
-                        <li>Suppression compte (Droit à l'oubli). <em>(Réf Code: Client <code>Edit_Profile</code> -> <code>user_controller.delete_user</code>)</em></li>
-                    </ul>
-                </li>
-                 <li><strong>Logout Sécurisé :</strong>
-                    <ul>
-                       <li>Nettoyage `sessionStorage` (Client). <em>(Réf Code: Client <code>session_controller.logout</code>)</em></li>
-                       <li>Évite persistance token et spoofing.</li>
-                    </ul>
-                </li>
-                <li><strong>Rôle Administrateur (Bob Thomas) :</strong>
-                    <ul>
-                       <li>Droits étendus (voir/suppr users). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Admin]</a></li>
-                       <li>Vérification via JWT. <em>(Réf Code: Client <code>Dashboard</code>, Server `@require_jwt`/`request.is_admin`)</em></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+                    <p>
+                        L'entreprise a sollicité une solution pour renforcer la sécurité des données, en particulier dans le cadre du respect du RGPD, afin d'éviter toute fuite de données sensibles.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 tea-accent-gold">Spécifications du projet</h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Spécifications technologiques</h4>
+                        <p>Utilisation exclusive du langage Python pour réaliser les différentes fonctionnalités avec le Framework Anvil pour l'application web.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Objectifs pédagogiques</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Justifier techniquement le choix d'algorithmes de chiffrement et de hachage</li>
+                            <li>Connaître les limites des solutions renforçant la confidentialité</li>
+                            <li>Implémenter des algorithmes cryptographiques dans un contexte déterminé</li>
+                            <li>Prendre en compte l'évolution de l'informatique quantique</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Architecture Section -->
+    <section id="architecture" class="section-container">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 section-heading">Architecture Technique</h2>
+            <div class="fade-in">
+                <div class="architecture-diagram">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 tea-accent-gold text-center">Frontend (Anvil)</h3>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">Interface utilisateur</h4>
+                                <p>Pages interactives construites avec Anvil</p>
+                            </div>
+                            <div class="connector">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">Contrôleurs</h4>
+                                <p>Gestion des interactions et requêtes</p>
+                            </div>
+                            <div class="connector">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">Modules d'authentification</h4>
+                                <p>Gestion des sessions et des tokens JWT</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 tea-accent-gold text-center">Backend (Flask)</h3>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">API REST</h4>
+                                <p>Endpoints Flask pour les ressources</p>
+                            </div>
+                            <div class="connector">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">Couche de sécurité</h4>
+                                <p>Cryptographie et validation des tokens</p>
+                            </div>
+                            <div class="connector">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                            <div class="diagram-node bg-gray-800 border border-gray-600">
+                                <h4 class="text-lg font-semibold tea-accent">Base de données</h4>
+                                <p>SQLAlchemy avec modèles de données</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold mt-12 mb-6 tea-accent-gold text-center">Flux de données</h3>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="py-2 px-4 bg-gray-800 border border-gray-600 rounded-full">
+                            <i class="fas fa-user tea-accent-gold mr-2"></i> Authentification
+                        </div>
+                        <div class="py-2 px-4 bg-gray-800 border border-gray-600 rounded-full">
+                            <i class="fas fa-shopping-cart tea-accent-gold mr-2"></i> Gestion du panier
+                        </div>
+                        <div class="py-2 px-4 bg-gray-800 border border-gray-600 rounded-full">
+                            <i class="fas fa-mug-hot tea-accent-gold mr-2"></i> Produits (thés)
+                        </div>
+                        <div class="py-2 px-4 bg-gray-800 border border-gray-600 rounded-full">
+                            <i class="fas fa-gift tea-accent-gold mr-2"></i> Produits (goodies)
+                        </div>
+                        <div class="py-2 px-4 bg-gray-800 border border-gray-600 rounded-full">
+                            <i class="fas fa-users-cog tea-accent-gold mr-2"></i> Administration
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 tea-accent-gold">Structure du Backend</h3>
+                        <div class="code-display">
+                            <div class="code-header">
+                                <span>app.py</span>
+                            </div>
+                            <pre class="language-python"><code>from flask import Flask
+from flask_cors import CORS
+from dotenv import load_dotenv
+import os
 
-        <section id="pres-securite">
-            <h2>3. Mécanismes de Sécurité Clés (5-6 min)</h2>
-            <p>Les choix techniques majeurs (réponse aux exigences techniques du CDC) :</p>
-            <ul>
-                <li><strong>Hachage Mots de Passe: Argon2id</strong>
-                    <ul>
-                        <li><strong>Exigence CDC :</strong> Hachage sécurisé.</li>
-                        <li><strong>Pourquoi ?</strong> Standard moderne, résistance GPU/ASIC. <a href="justification-technique.html#authentification" target="_blank">[Voir Comparaison vs bcrypt...]</a></li>
-                        <li><pre><code class="language-python"># Server: routes/session/login.py (Vérification)
+from db import db_session
+from routes.users import users
+from routes.users.crud import users_crud
+from routes.cart import cart
+from routes.session import session
+from routes.teas import teas
+from routes.goodies import goodies
+
+app = Flask(__name__)
+
+# CORS autorisé pour l'app Anvil uniquement
+anvil_app_origin = "https://jnhvanepger556sc.anvil.app"
+CORS(app, supports_credentials=True, origins=[anvil_app_origin])
+
+# Configuration de base
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
+# Enregistrement des blueprints
+app.register_blueprint(users_crud, url_prefix="/users")
+app.register_blueprint(session, url_prefix="/session")
+app.register_blueprint(cart_crud, url_prefix="/cart")
+app.register_blueprint(teas_crud, url_prefix="/teas")
+app.register_blueprint(goodies_crud, url_prefix="/goodies")</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 tea-accent-gold">Structure du Frontend</h3>
+                        <div class="code-display">
+                            <div class="code-header">
+                                <span>session_controller.py</span>
+                            </div>
+                            <pre class="language-python"><code>from anvil.js.window import sessionStorage
+import anvil.http
+
+BASE_URL = "https://tearoombackend.onrender.com"
+
+def login(email, password):
+    res = anvil.http.request(
+        f"{BASE_URL}/session/login",
+        method="POST",
+        data={"email": email, "password": password},
+        headers={"Content-Type": "application/json"},
+        json=True,
+        use_service_worker=False
+    )
+    if res["success"]:
+        sessionStorage.setItem("jwt_token", res["token"])
+    return res
+
+def get_user_info():
+    token = sessionStorage.getItem("jwt_token")
+    if not token:
+        return None
+    try:
+        res = anvil.http.request(
+            f"{BASE_URL}/session/me",
+            method="GET",
+            headers={"Authorization": f"Bearer {token}"},
+            json=True,
+            use_service_worker=False
+        )
+        if res["logged_in"]:
+            return res["user"]
+        return None
+    except anvil.http.HttpError as e:
+        print("Token invalide ou expiré :", e.status)
+        sessionStorage.removeItem("jwt_token")
+        return None
+
+def logout():
+    sessionStorage.removeItem("jwt_token")</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Functionality Section -->
+    <section id="functions" class="section-container">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 section-heading">Fonctionnalités</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 fade-in">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Principales fonctionnalités</h3>
+                    
+                    <div class="card p-5 rounded-lg mb-6">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Authentification & Profil</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Inscription et connexion des utilisateurs</li>
+                            <li>Gestion du profil utilisateur</li>
+                            <li>Modification et suppression de compte</li>
+                            <li>Renouvellement d'authentification pour sessions longues</li>
+                            <li>Gestion sécurisée des mots de passe</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card p-5 rounded-lg mb-6">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Catalogue de produits</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Affichage des thés disponibles</li>
+                            <li>Affichage des goodies disponibles</li>
+                            <li>Visualisation détaillée des produits</li>
+                            <li>Gestion des stocks en temps réel</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card p-5 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Paniers & Commandes</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Ajout de produits au panier</li>
+                            <li>Modification des quantités</li>
+                            <li>Suppression d'articles</li>
+                            <li>Calcul automatique du total</li>
+                            <li>Validation de commande</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Fonctionnalités d'administration</h3>
+                    
+                    <div class="card p-5 rounded-lg mb-6">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Gestion des utilisateurs</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Visualisation de tous les utilisateurs</li>
+                            <li>Suppression de comptes (droit à l'oubli)</li>
+                            <li>Droits d'accès spécifiques pour l'administrateur</li>
+                        </ul>
+                        <div class="code-display mt-4">
+                            <div class="code-header">
+                                <span>users_crud.py (extrait)</span>
+                            </div>
+                            <pre class="language-python"><code>@users_crud.route("/", methods=["GET"], strict_slashes=False)
+@require_jwt
+def list_users():
+    if not request.is_admin:
+        return jsonify({"error": "Accès interdit"}), 403
+
+    users = User.query.all()
+    return jsonify([
+        {
+            "id": u.id,
+            "firstname": u.firstname,
+            "lastname": u.lastname,
+            "email": u.email,
+            "is_admin": u.is_admin,
+            "created_at": u.created_at,
+            "updated_at": u.updated_at,
+            "photo": f"data:image/jpeg;base64,{base64.b64encode(u.photo).decode()}" if u.photo else None
+        } for u in users
+    ])</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-5 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-2 tea-accent">Gestion des produits</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Ajout de nouveaux produits (thés/goodies)</li>
+                            <li>Modification des informations produits</li>
+                            <li>Gestion des images des produits</li>
+                            <li>Mise à jour des stocks</li>
+                            <li>Suppression de produits</li>
+                        </ul>
+                        <div class="code-display mt-4">
+                            <div class="code-header">
+                                <span>cart_crud.py (extrait)</span>
+                            </div>
+                            <pre class="language-python"><code>@cart_crud.route("/", methods=["POST"], strict_slashes=False)
+@require_jwt
+def add_to_cart():
+    data = request.get_json()
+    product_id = data["product_id"]
+    quantity = data.get("quantity", 1)
+    user_id = request.user_id
+
+    product = Tea.query.get(product_id)
+    if product is None:
+        product = Goodie.query.get(product_id)
+
+    if product is None or product.quantity < quantity:
+        return jsonify({
+            "success": False, 
+            "message": "Produit introuvable ou stock insuffisant"
+        })
+
+    cart = Cart.query.filter_by(user_id=user_id).first()
+    # [...suite du code...]</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Security Section -->
+    <section id="security" class="section-container">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 section-heading">Sécurité</h2>
+            <div class="fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="security-card p-5 rounded-lg">
+                        <i class="fas fa-lock security-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Confidentialité</h3>
+                        <p>Protection des données sensibles via chiffrement et sécurisation des communications.</p>
+                    </div>
+                    <div class="security-card p-5 rounded-lg">
+                        <i class="fas fa-shield-alt security-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Intégrité</h3>
+                        <p>Garantie de non-altération des données, particulièrement pour les photos utilisateurs.</p>
+                    </div>
+                    <div class="security-card p-5 rounded-lg">
+                        <i class="fas fa-server security-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Disponibilité</h3>
+                        <p>Accès aux ressources pour les utilisateurs authentifiés avec gestion des autorisations.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Mécanismes de sécurité implémentés</h3>
+                        
+                        <div class="security-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Authentification JWT</h4>
+                            <p class="mb-4">Utilisation de tokens JWT (JSON Web Tokens) pour l'authentification des utilisateurs avec une vérification à chaque requête protégée.</p>
+                            <div class="code-display">
+                                <div class="code-header">
+                                    <span>db.py (middleware d'authentification)</span>
+                                </div>
+                                <pre class="language-python"><code>def require_jwt(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get("Authorization", "")
+        if not auth_header.startswith("Bearer "):
+            return jsonify({"error": "Authorization header missing"}), 401
+
+        token = auth_header.split(" ")[1]
+        try:
+            payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+        except jwt.ExpiredSignatureError:
+            return jsonify({"error": "Token expired"}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({"error": "Invalid token"}), 401
+
+        request.user_id = payload["user_id"]
+        request.is_admin = payload.get("is_admin", False)
+        return f(*args, **kwargs)
+
+    return decorated_function</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="security-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Protection contre les attaques par force brute</h4>
+                            <p class="mb-4">Implémentation d'un mécanisme de verrouillage temporaire après plusieurs tentatives de connexion échouées.</p>
+                            <div class="code-display">
+                                <div class="code-header">
+                                    <span>login.py (extrait)</span>
+                                </div>
+                                <pre class="language-python"><code>if user.n_password_failures >= 3 and user.last_failed:
+    # S'assurer que last_failed est timezone-aware (UTC)
+    if user.last_failed.tzinfo is None:
+        last_failed_aware = user.last_failed.replace(tzinfo=timezone.utc)
+    else:
+        last_failed_aware = user.last_failed
+
+    if (now - last_failed_aware) < timedelta(minutes=1):
+        return jsonify({"success": False, "reason": 1})  # bloqué</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Gestion de la cryptographie</h3>
+                        
+                        <div class="security-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Hachage sécurisé des mots de passe</h4>
+                            <p class="mb-4">Utilisation d'Argon2 pour le hachage des mots de passe, l'un des algorithmes les plus sécurisés, résistant aux attaques par GPU et aux menaces futures de l'informatique quantique.</p>
+                            <div class="code-display">
+                                <div class="code-header">
+                                    <span>login.py (vérification de mot de passe)</span>
+                                </div>
+                                <pre class="language-python"><code>ph = PasswordHasher()
 try:
-    ph.verify(user.password, password) # 'user.password' est le hash Argon2id stocké
-    # ... Success
-except exceptions.VerifyMismatchError:
-    # ... Failure</code></pre>
-                        <p class="code-explanation">Vérifie le mot de passe fourni contre le hash sécurisé stocké. Échoue en toute sécurité si différent.</p></li>
-                        <li><em>(Réf Code Complet: Server <code>PasswordHasher</code>)</em></li>
-                    </ul>
-                </li>
-                <li><strong>Gestion de Session: JWT (JSON Web Tokens)</strong>
-                    <ul>
-                        <li><strong>Exigence CDC :</strong> Authentification robuste, anti-usurpation.</li>
-                        <li><strong>Pourquoi ?</strong> Stateless, scalabilité, infos user embarquées. <a href="justification-technique.html#authentification" target="_blank">[Voir Justification]</a></li>
-                         <li><pre><code class="language-python"># Server: routes/session/login.py (Création)
-token = jwt.encode({
-        "user_id": user.id,
-        "is_admin": user.is_admin,
-        "exp": datetime.now(timezone.utc) + timedelta(hours=1) # Expiration 1h
-    }, JWT_SECRET, algorithm="HS256")</code></pre>
-                        <p class="code-explanation">Crée un token signé contenant ID, rôle admin, et une date d'expiration.</p></li>
-                         <li><em>(Réf Code Complet: Client `sessionStorage`, Server `@require_jwt`)</em></li>
-                    </ul>
-                </li>
-                 <li><strong>Gestion Clé Secrète JWT :</strong>
-                    <ul>
-                         <li><strong>Réponse au CDC ("obfuscation") :</strong> Bonne pratique moderne = stockage sécurisé via variable d'environnement.</li>
-                         <li><pre><code class="language-python"># Server: app.py / db.py
-SECRET_KEY = os.getenv("SECRET_KEY")
-JWT_SECRET = os.getenv("SECRET_KEY") # Utilisée pour signer/vérifier JWT</code></pre>
-                         <p class="code-explanation">La clé secrète n'est pas dans le code, mais chargée depuis l'environnement serveur.</p></li>
-                         <li><a href="justification-technique.html#protection-donnees" target="_blank">[Bonnes Pratiques]</a></li>
-                    </ul>
-                </li>
-                <li><strong>Protection/Intégrité Photos & Stéganographie :</strong>
-                     <ul>
-                        <li><strong>Exigence CDC (double) :</strong> Intégrité photo ET utilisation stégano.</li>
-                        <li><strong>Intégrité :</strong> Stockage BLOB limite certains risques. Hachage serait une amélioration future. <a href="justification-technique.html#protection-donnees" target="_blank">[Justification BLOB]</a></li>
-                        <li><strong>Utilisation Stégano :</strong> Fonction `test_steno` implémentée (canal admin ?). <a href="rapport-final.html#steganographie" target="_blank">[Détails Concept]</a> <em>(Réf Code: Client <code>LoginForm</code> appelant <code>test_steno</code>)</em></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+    ph.verify(user.password, password)
 
-        <section id="pres-ameliorations">
-            <h2>4. Améliorations & Vision Future (2-3 min)</h2>
-            <p>Anticipation et prochaines étapes pour renforcer encore la sécurité :</p>
-            <ul>
-                <li><strong>Authentification Multi-Facteurs (MFA)</strong>
-                    <ul>
-                        <li><strong>Réponse CDC :</strong> "Garantir totalement" l'identité admin.</li>
-                        <li>Priorité haute pour renforcer l'accès. <a href="securite-recommandations.html#recommandations-securite" target="_blank">[Voir Recommandations]</a></li>
-                    </ul>
-                </li>
-                <li><strong>Cryptographie Post-Quantique (PQC)</strong>
-                     <ul>
-                        <li><strong>Réponse CDC :</strong> Anticiper la menace quantique.</li>
-                        <li>Stratégie : Crypto-agilité, veille sur standards NIST (Kyber, Dilithium...). <a href="informatique-quantique.html#transition-post-quantique" target="_blank">[Notre Stratégie PQC]</a></li>
-                    </ul>
-                </li>
-                <li><strong>Sécurité Réseau (Déploiement)</strong>
-                    <ul>
-                         <li><strong>Réponse CDC :</strong> Recommandations protocoles/certificats.</li>
-                         <li>HTTPS/TLS systématique, HSTS, évaluation pinning certificat.</li>
-                    </ul>
-                </li>
-                 <li><strong>Autres :</strong> Journalisation centralisée, Tests sécurité CI/CD... <a href="securite-recommandations.html#plan-action" target="_blank">[Plan d'Action Complet]</a></li>
-            </ul>
-        </section>
+    user.n_password_failures = 0
+    user.last_failed = None
+    user.last_login = now
+    db_session.session.commit()
 
-         <section id="pres-conclusion">
-            <h2>5. Conclusion (1 min)</h2>
-            <ul>
-                <li><strong>TeaRoom: Shadows :</strong> Sécurité robuste alignée RGPD/CIA.</li>
-                <li><strong>Réponse au CDC :</strong> Mécanismes modernes (Argon2id, JWT), justification des choix, anticipation (PQC).</li>
-                <li><strong>Processus Démontré :</strong> Implémentation (Anvil) et Documentation (ce site).</li>
-            </ul>
-            <p style="font-weight: bold; text-align: center; margin-top: 2rem;">Merci. Questions ?</p>
-        </section>
+    # Générer un token JWT
+    token = jwt.encode(
+        {
+            "user_id": user.id,
+            "is_admin": user.is_admin,
+            "exp": datetime.now(timezone.utc) + timedelta(hours=1)
+        },
+        JWT_SECRET,
+        algorithm="HS256"
+    )</code></pre>
+                            </div>
+                        </div>
 
-    </main>
+                        <div class="security-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Chiffrement AES de la facture</h4>
+                            <p class="mb-4">Utilisation d'AES pour chiffrer la facture, avec un vecteur d'initialisation (IV) et une clé secrète partagée.</p>
+                                <div class="code-header">
+                                    <span>encrypt_pdf</span>
+                                </div>
+                                <pre class="language-python"><code>
+def encrypt_pdf(pdf_data):
+    """Chiffre les données PDF avec AES"""
+    cipher = Cipher(algorithms.AES(AES_KEY), modes.CBC(AES_IV), backend=default_backend())
+    encryptor = cipher.encryptor()
+    pad_length = 16 - (len(pdf_data) % 16)
+    padded_data = pdf_data + bytes([pad_length]) * pad_length
 
-    <footer>
-        <p>&copy; 2025 TeaRoom: Shadows</p>
+    encrypted_data = encryptor.update(padded_data) + encryptor.finalize()
+    return encrypted_data
+    </code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="security-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Sécurisation des données sensibles</h4>
+                            <p>Plusieurs techniques sont mises en œuvre pour protéger les données sensibles :</p>
+                            <ul class="list-disc list-inside space-y-2 mb-4">
+                                <li>Validation de l'intégrité des images utilisateurs</li>
+                                <li>Stéganographie pour masquer des métadonnées sensibles</li>
+                                <li>Nettoyage des sessions lors de la déconnexion</li>
+                                <li>CORS configuré pour limiter les requêtes à l'origine légitime</li>
+                            </ul>
+                            <div class="code-display">
+                                <div class="code-header">
+                                    <span>app.py (CORS)</span>
+                                </div>
+                                <pre class="language-python"><code># CORS autorisé pour ton app Anvil uniquement (avec envoi d'en-tête Authorization)
+anvil_app_origin = "https://jnhvanepger556sc.anvil.app"
+CORS(app, supports_credentials=True, origins=[anvil_app_origin])</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Défis et limitations</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="security-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Menace de l'informatique quantique</h4>
+                            <p>Les algorithmes quantiques comme l'algorithme de Shor pourraient casser les systèmes de chiffrement asymétriques actuels. L'utilisation d'Argon2 et la préparation à la migration vers des algorithmes post-quantiques sont des mesures d'atténuation.</p>
+                        </div>
+                        <div class="security-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent-purple">Équilibre entre sécurité et performance</h4>
+                            <p>Le renforcement de la sécurité (comme l'augmentation du coût du hachage Argon2) peut affecter les performances. Un équilibre est maintenu pour assurer une expérience utilisateur fluide tout en protégeant les données sensibles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Improvements Section -->
+    <section id="improvements" class="section-container">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 section-heading">Améliorations Potentielles</h2>
+            <div class="fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="improvement-card p-5 rounded-lg">
+                        <i class="fas fa-shield-alt enhancement-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Renforcement de la sécurité</h3>
+                        <p>Améliorations techniques pour renforcer la protection des données et la résistance aux attaques.</p>
+                    </div>
+                    <div class="improvement-card p-5 rounded-lg">
+                        <i class="fas fa-cogs enhancement-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Optimisations techniques</h3>
+                        <p>Optimisations pour améliorer les performances et la robustesse de l'application.</p>
+                    </div>
+                    <div class="improvement-card p-5 rounded-lg">
+                        <i class="fas fa-lightbulb enhancement-icon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Nouvelles fonctionnalités</h3>
+                        <p>Extensions fonctionnelles pour enrichir l'expérience utilisateur.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Améliorations de sécurité</h3>
+                        
+                        <div class="improvement-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent">Authentification multi-facteurs (MFA)</h4>
+                            <p class="mb-2">Ajouter une authentification à deux facteurs pour renforcer la sécurité des comptes, notamment pour les administrateurs.</p>
+                            <p>Exemple d'implémentation avec TOTP (Time-based One-Time Password) :</p>
+                            <div class="code-display mt-2">
+                                <div class="code-header">
+                                    <span>mfa.py (proposition)</span>
+                                </div>
+                                <pre class="language-python"><code>import pyotp
+
+def generate_totp_secret():
+    """Génère un secret pour TOTP"""
+    return pyotp.random_base32()
+
+def verify_totp(secret, token):
+    """Vérifie un code TOTP"""
+    totp = pyotp.TOTP(secret)
+    return totp.verify(token)
+
+def get_totp_uri(secret, email, issuer="TeaRoom"):
+    """Génère l'URI pour les applications d'authentification"""
+    totp = pyotp.TOTP(secret)
+    return totp.provisioning_uri(email, issuer_name=issuer)</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="improvement-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent">Chiffrement homomorphe pour données sensibles</h4>
+                            <p class="mb-4">Utiliser le chiffrement homomorphe pour les données sensibles permettrait de réaliser des opérations sur les données chiffrées sans avoir besoin de les déchiffrer.</p>
+                            <p>Cela offrirait une couche supplémentaire de protection même en cas de compromission de la base de données.</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 tea-accent-gold">Optimisations et nouvelles fonctionnalités</h3>
+                        
+                        <div class="improvement-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent">Système de paiement sécurisé intégré</h4>
+                            <p class="mb-4">Intégrer un système de paiement en ligne sécurisé permettant aux clients de finaliser leurs commandes à distance, en utilisant les normes PCI-DSS.</p>
+                            <p>Cela remplacerait le système actuel où les clients paient sur place après avoir passé leur commande en ligne.</p>
+                        </div>
+                        
+                        <div class="improvement-card p-5 rounded-lg mb-6">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent">Système de réservation avancé</h4>
+                            <p>Améliorer le système de réservation de tables avec :</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Visualisation en temps réel des disponibilités</li>
+                                <li>Choix de l'emplacement dans le salon</li>
+                                <li>Pré-commandes de thés et pâtisseries</li>
+                                <li>Rappels automatisés et confirmations par email</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="improvement-card p-5 rounded-lg">
+                            <h4 class="text-xl font-semibold mb-2 tea-accent">Migration vers une architecture post-quantique</h4>
+                            <p class="mb-4">Préparation à la migration vers des algorithmes cryptographiques résistants à l'informatique quantique en utilisant les normes NIST Post-Quantum Cryptography.</p>
+                            <p>Cela garantirait la sécurité à long terme des données, même face à l'émergence d'ordinateurs quantiques puissants.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="py-12 bg-gray-900 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold">
+                        <span class="tea-accent-gold">Tea</span><span class="tea-accent">Room</span> : <span class="tea-accent-purple">Shadows</span>
+                    </h2>
+                    <p class="mt-2 text-gray-400">Techniques de sécurisation cryptographique - UE 6</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#intro" class="text-gray-400 hover:text-tea-accent">Introduction</a>
+                    <a href="#context" class="text-gray-400 hover:text-tea-accent">Contexte</a>
+                    <a href="#architecture" class="text-gray-400 hover:text-tea-accent">Architecture</a>
+                    <a href="#functions" class="text-gray-400 hover:text-tea-accent">Fonctionnalités</a>
+                    <a href="#security" class="text-gray-400 hover:text-tea-accent">Sécurité</a>
+                    <a href="#improvements" class="text-gray-400 hover:text-tea-accent">Améliorations</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2024-2025 Bachelor 1ère année Cybersécurité - Gaming Campus</p>
+            </div>
+        </div>
     </footer>
-
-    <script src="js/theme-switcher.js"></script>
-    <script src="vendor/prism.js"></script>
+    
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/components/prism-python.min.js"></script>
+    
     <script>
-        // Optionnel: Forcer Prism si besoin, sinon il s'active souvent seul.
-        // document.addEventListener('DOMContentLoaded', (event) => {
-        //    Prism.highlightAll();
-        // });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('data-section');
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active link
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Hide mobile menu after click
+                        if (mobileMenu) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // Fade-in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check on page load
+            checkFade();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkFade);
+            
+            // Update active nav item based on scroll position
+            function updateActiveNavItem() {
+                const scrollPosition = window.scrollY + 200;
+                
+                const sections = [
+                    { id: 'intro', element: document.getElementById('intro') },
+                    { id: 'context', element: document.getElementById('context') },
+                    { id: 'architecture', element: document.getElementById('architecture') },
+                    { id: 'functions', element: document.getElementById('functions') },
+                    { id: 'security', element: document.getElementById('security') },
+                    { id: 'improvements', element: document.getElementById('improvements') }
+                ];
+                
+                // Find the current section
+                let currentSection = sections[0].id;
+                
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    if (section.element && scrollPosition >= section.element.offsetTop - 100) {
+                        currentSection = section.id;
+                    }
+                }
+                
+                // Update active class
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNavItem);
+            
+            // Initialize Prism.js for code highlighting
+            if (window.Prism) {
+                Prism.highlightAll();
+            }
+        });
     </script>
 </body>
-</html> 
+</html>
