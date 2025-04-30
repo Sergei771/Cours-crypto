@@ -286,6 +286,7 @@
                 <span class="tea-accent-gold">Tea</span><span class="tea-accent">Room</span> : <span class="tea-accent-purple">Shadows</span>
             </div>
             <div class="hidden md:flex space-x-8">
+                <a class="nav-link" href="index.html">Accueil</a>
                 <a class="nav-link active" data-section="intro">Introduction</a>
                 <a class="nav-link" data-section="context">Contexte</a>
                 <a class="nav-link" data-section="architecture">Architecture</a>
@@ -301,6 +302,7 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95 w-full">
             <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
+                <a class="nav-link" href="index.html">Accueil</a>
                 <a class="nav-link active" data-section="intro">Introduction</a>
                 <a class="nav-link" data-section="context">Contexte</a>
                 <a class="nav-link" data-section="architecture">Architecture</a>
@@ -969,23 +971,31 @@ def get_totp_uri(secret, email, issuer="TeaRoom"):
             
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('data-section');
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        window.scrollTo({
-                            top: targetSection.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+                    // Check if it's a regular link or a section link
+                    if (this.hasAttribute('data-section')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('data-section');
+                        const targetSection = document.getElementById(targetId);
                         
-                        // Update active link
-                        navLinks.forEach(link => link.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Hide mobile menu after click
-                        if (mobileMenu) {
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Update active link
+                            navLinks.forEach(link => link.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Hide mobile menu after click
+                            if (mobileMenu) {
+                                mobileMenu.classList.add('hidden');
+                            }
+                        }
+                    } else {
+                        // For regular links like "Accueil", let the default browser behavior happen
+                        // Optionally hide mobile menu if it's open
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                         }
                     }
@@ -1026,7 +1036,7 @@ def get_totp_uri(secret, email, issuer="TeaRoom"):
                 ];
                 
                 // Find the current section
-                let currentSection = sections[0].id;
+                let currentSection = sections[0].id; // Default to intro
                 
                 for (let i = 0; i < sections.length; i++) {
                     const section = sections[i];
@@ -1035,21 +1045,18 @@ def get_totp_uri(secret, email, issuer="TeaRoom"):
                     }
                 }
                 
-                // Update active class
+                // Update active class for section links only
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === currentSection) {
-                        link.classList.add('active');
+                    if (link.hasAttribute('data-section')) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-section') === currentSection) {
+                            link.classList.add('active');
+                        }
                     }
                 });
             }
             
             window.addEventListener('scroll', updateActiveNavItem);
-            
-            // Initialize Prism.js for code highlighting
-            if (window.Prism) {
-                Prism.highlightAll();
-            }
         });
     </script>
 </body>
