@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Final - TeaRoom: Shadows</title>
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="vendor/prism.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/images/logo.svg" alt="TeaRoom: Shadows Logo" class="logo">
+            <h1>Rapport Final</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="rapport-final.html" class="active">Rapport Final</a></li>
+                <li><a href="justification-technique.html">Justification Technique</a></li>
+                <li><a href="securite-recommandations.html">Sécurité et Recommandations</a></li>
+                <li><a href="informatique-quantique.html">Informatique Quantique</a></li>
+            </ul>
+            <div class="toc-container mobile-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript -->
+            </div>
+        </nav>
+        <button id="theme-toggle" aria-label="Basculer mode clair/sombre">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </header>
+
+    <div class="document-container">
+        <!-- Barre latérale avec table des matières (conservée pour desktop, cachée sur mobile) -->
+        <aside class="sidebar">
+            <div class="toc-container desktop-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript DANS LA SIDEBAR -->
+            </div>
+        </aside>
+
+        <!-- Barre de progression -->
+        <div class="progress-bar">
+            <div class="progress-indicator"></div>
+        </div>
+
+        <!-- Contenu principal du document -->
+        <main class="document-content">
+            <h1>Rapport Final - TeaRoom: Shadows</h1>
+
+            <!-- Boutons d'action déplacés ici -->
+            <div class="action-buttons">
+                <button id="print-button" aria-label="Imprimer ou Exporter en PDF">
+                    <span class="print-icon">🖨️</span> Imprimer / PDF
+                </button>
+            </div>
+
+            <section id="introduction">
+                <h2>1. Introduction</h2>
+                <p>
+                    TeaRoom est une application de salon de thé en ligne qui permet aux utilisateurs de découvrir, commander et apprécier une vaste sélection de thés du monde entier. Le projet "TeaRoom: Shadows" est une initiative de sécurisation cryptographique visant à protéger cette application contre diverses menaces informatiques.
+                </p>
+                <p>
+                    Ce rapport présente une vue d'ensemble du projet, ses objectifs, les fonctionnalités mises en œuvre, et les résultats obtenus. Il s'agit d'une présentation générale destinée à comprendre les enjeux et solutions du projet.
+                </p>
+            </section>
+            
+            <section id="objectifs">
+                <h2>2. Objectifs du projet</h2>
+                <p>
+                    Le projet TeaRoom: Shadows vise à renforcer la sécurité de l'application TeaRoom en implémentant des mécanismes cryptographiques modernes et robustes. Les objectifs principaux comprennent:
+                </p>
+                <ul>
+                    <li>Protection des données sensibles des utilisateurs</li>
+                    <li>Sécurisation des transactions et des paiements</li>
+                    <li>Mise en place d'une authentification forte</li>
+                    <li>Chiffrement des communications client-serveur</li>
+                    <li>Protection contre les vulnérabilités web courantes</li>
+                </ul>
+            </section>
+            
+            <section id="methodologie">
+                <h2>3. Méthodologie</h2>
+                <p>
+                    Pour atteindre nos objectifs de sécurité, nous avons adopté une approche méthodique en plusieurs phases:
+                </p>
+                <ol>
+                    <li>Analyse des risques et vulnérabilités potentielles</li>
+                    <li>Conception d'une architecture sécurisée</li>
+                    <li>Implémentation des mécanismes cryptographiques</li>
+                    <li>Tests de sécurité et validation</li>
+                    <li>Documentation et formation</li>
+                </ol>
+            </section>
+            
+            <section id="contenu-principal">
+                <h2>4. Fonctionnalités implémentées</h2>
+                
+                <h3>4.1 Authentification sécurisée</h3>
+                <p>Le système d'authentification de TeaRoom implémente plusieurs couches de sécurité pour protéger les comptes utilisateurs.</p>
+                
+                <h4>Inscription sécurisée</h4>
+                <p>L'application applique des règles strictes de validation des mots de passe, imposant des exigences minimales (au moins 8 caractères, majuscules, minuscules, chiffres et caractères spéciaux).</p>
+                <p>Une fois l'inscription validée, les données sensibles sont protégées et le mot de passe est haché avec Argon2id, un algorithme de pointe spécialement conçu pour résister aux attaques par force brute, y compris celles utilisant des GPU spécialisés.</p>
+                
+                <h4>Connexion sécurisée</h4>
+                <p>Le processus d'authentification met en œuvre plusieurs couches de sécurité :</p>
+                <ul>
+                    <li>Authentification par email et mot de passe avec vérification sécurisée</li>
+                    <li>Protection contre les attaques par force brute (limitation à 3 tentatives avant verrouillage temporaire)</li>
+                    <li>Génération de tokens JWT (JSON Web Tokens) avec expiration (1 heure)</li>
+                    <li>Protection contre les attaques par timing avec vérification à temps constant</li>
+                </ul>
+                <p>Le système enregistre également les informations relatives aux connexions et aux tentatives échouées, ce qui permet de détecter les comportements suspects et de bloquer temporairement les comptes après plusieurs échecs consécutifs.</p>
+                
+                <h4>Gestion des sessions utilisateur</h4>
+                <p>Les sessions sont gérées via des tokens JWT signés, qui contiennent les informations essentielles comme l'identifiant utilisateur et les droits d'accès. Ces tokens sont stockés côté client dans le sessionStorage et vérifiés à chaque requête nécessitant une authentification.</p>
+                <p>Le décorateur @require_jwt utilisé dans le code backend assure une vérification systématique et cohérente des tokens, garantissant que seuls les utilisateurs authentifiés peuvent accéder aux ressources protégées.</p>
+                
+                <h4>Déconnexion sécurisée</h4>
+                <p>Lors de la déconnexion, le système effectue un nettoyage complet des données d'authentification :</p>
+                <ul>
+                    <li>Suppression du token JWT du sessionStorage</li>
+                    <li>Effacement des cookies de session côté client</li>
+                    <li>Invalidation de la session côté serveur</li>
+                </ul>
+                <p>Cette approche garantit qu'aucune donnée d'authentification ne persiste après la déconnexion, empêchant ainsi toute possibilité de spoofing ou de réutilisation de session.</p>
+                
+                <h3>4.2 Chiffrement des données</h3>
+                <p>L'application TeaRoom implémente des mécanismes de protection des données personnelles des utilisateurs, conformément aux exigences du RGPD.</p>
+                
+                <h4>Protection des photos utilisateur</h4>
+                <p>Les photos de profil des utilisateurs bénéficient d'une protection renforcée :</p>
+                <ul>
+                    <li>Traitement et validation des images avant stockage (vérification de format, type MIME)</li>
+                    <li>Stockage sécurisé des images sous forme de BLOB dans la base de données</li>
+                    <li>Association directe avec les entités correspondantes pour une gestion des permissions centralisée</li>
+                    <li>Transmission encodée en base64 avec préfixe MIME approprié</li>
+                </ul>
+                <p>Cette approche protège contre les attaques par traversée de chemin et simplifie la gestion des permissions d'accès aux images.</p>
+                
+                <h4>Chiffrement des factures (AES)</h4>
+                <p>Afin de protéger la confidentialité des informations de commande, les factures générées ou stockées par le système sont chiffrées en utilisant l'algorithme AES (Advanced Encryption Standard). Ce standard robuste assure que les détails des commandes restent illisibles sans la clé appropriée, renforçant la sécurité des données sensibles liées aux transactions.</p>
+                
+                <h4>Gestion des clés et secrets</h4>
+                <p>Les clés secrètes, notamment celles utilisées pour signer les tokens JWT, sont stockées dans des variables d'environnement plutôt que dans le code source, conformément aux bonnes pratiques. Cette méthode permet de séparer les informations sensibles du code et facilite la rotation des clés sans modification du code.</p>
+                
+                <h3>4.3 Sécurisation des API</h3>
+                <p>Pour Bob Thomas, l'administrateur du système, des mécanismes de sécurité supplémentaires ont été implémentés afin de garantir son identité lors d'opérations critiques.</p>
+                
+                <h4>Authentification administrative renforcée</h4>
+                <p>L'application identifie automatiquement Bob Thomas comme administrateur grâce à son email lors de la connexion. Ce statut spécial lui donne accès à des fonctionnalités supplémentaires dans l'interface, notamment :</p>
+                <ul>
+                    <li>La gestion des utilisateurs (visualisation et suppression)</li>
+                    <li>La gestion complète des produits (thés et goodies)</li>
+                    <li>L'accès aux informations sensibles</li>
+                </ul>
+                <p>L'interface utilisateur s'adapte dynamiquement aux privilèges de l'utilisateur connecté, masquant ou affichant les fonctionnalités d'administration selon le statut.</p>
+                
+                <h4>Vérification d'identité pour les opérations sensibles</h4>
+                <p>Pour les opérations sensibles comme la modification du profil ou la suppression de compte, notre application exige une re-vérification de l'identité de l'utilisateur à travers la saisie de son mot de passe.</p>
+                <p>Cette double vérification réduit le risque d'actions accidentelles et protège contre les attaques de type session hijacking, où un attaquant aurait réussi à voler le token JWT d'un utilisateur.</p>
+                
+                <h4>Canal d'authentification secondaire via stéganographie</h4>
+                <p>L'application implémente des fonctionnalités de stéganographie, comme le montre la présence de la fonction test_steno() dans le contrôleur utilisateur. Cette fonctionnalité est conçue pour intégrer des informations d'authentification cachées dans les images, créant ainsi un canal de communication invisible pour l'administrateur.</p>
+            </section>
+            
+            <section id="protection-identite">
+                <h2>5. Protection contre l'usurpation d'identité</h2>
+                
+                <p>L'application TeaRoom intègre plusieurs mécanismes pour prévenir l'usurpation d'identité et le spoofing, assurant ainsi l'authenticité des interactions utilisateur.</p>
+                
+                <h3>5.1 Gestion avancée des tokens JWT</h3>
+                <p>Les tokens JWT générés lors de la connexion incluent plusieurs sécurités :</p>
+                <ul>
+                    <li>Expiration automatique après une heure</li>
+                    <li>Signature cryptographique pour vérifier l'intégrité</li>
+                    <li>Inclusion de l'information sur les droits d'accès</li>
+                    <li>Vérification à chaque requête protégée</li>
+                </ul>
+                <p>Cette approche limite considérablement les risques de réutilisation frauduleuse des credentials d'authentification.</p>
+                
+                <h3>5.2 Nettoyage complet des données de session</h3>
+                <p>Pour prévenir le spoofing par récupération de données de session persistantes, la fonction de déconnexion effectue un nettoyage complet :</p>
+                <ul>
+                    <li>Suppression explicite du token du sessionStorage</li>
+                    <li>Invalidation des cookies de session</li>
+                    <li>Nettoyage côté serveur</li>
+                </ul>
+                <p>Ces mesures garantissent qu'aucune information d'authentification ne persiste après la déconnexion d'un utilisateur, protégeant ainsi contre les tentatives d'usurpation d'identité.</p>
+            </section>
+            
+            <section id="verification-integrite">
+                <h2>6. Vérification de l'intégrité des photos</h2>
+                
+                <p>L'architecture du système prévoit des mécanismes pour vérifier l'intégrité des photos téléchargées et suivre leur provenance.</p>
+                
+                <h3>6.1 Validation et traitement des images</h3>
+                <p>Les images téléchargées subissent plusieurs vérifications avant d'être acceptées dans le système :</p>
+                <ul>
+                    <li>Validation des extensions de fichier (jpg, jpeg, png, etc.)</li>
+                    <li>Traitement et conversion des images en format standard</li>
+                    <li>Encodage approprié pour le stockage et la transmission</li>
+                </ul>
+                <p>Cette approche réduit les risques liés aux uploads de fichiers malveillants tout en garantissant l'uniformité des médias stockés.</p>
+                
+                <h3>6.2 Fonctionnalités prévues pour la vérification d'intégrité</h3>
+                <p>L'architecture inclut des fonctionnalités pour vérifier l'intégrité des images et tracer leur provenance :</p>
+                <ul>
+                    <li>La route verify-photo/{user_id} est conçue pour vérifier l'intégrité des photos</li>
+                    <li>La fonction get_photo_metadata permet de récupérer des métadonnées associées aux images</li>
+                    <li>L'interface ItemTemplate2 affiche les informations sur les modifications apportées aux images</li>
+                </ul>
+                <p>Ces fonctionnalités permettent de détecter toute modification non autorisée des images et d'établir une traçabilité complète des changements.</p>
+            </section>
+            
+            <section id="steganographie">
+                <h2>7. Utilisation de la stéganographie</h2>
+                
+                <p>La stéganographie, l'art de dissimuler des informations dans d'autres données apparemment anodines, est utilisée de manière innovante dans TeaRoom pour renforcer plusieurs aspects de la sécurité.</p>
+                
+                <h3>7.1 Fonctionnalités stéganographiques</h3>
+                <p>L'application implémente des fonctionnalités de stéganographie à travers la fonction <code>test_steno()</code> dans le contrôleur utilisateur. Cette fonctionnalité utilise la technique d'<strong>insertion dans les chunks PNG (PNG Chunk Insertion)</strong> pour intégrer des informations cachées dans les images PNG, de manière conforme au standard et moins détectable que d'autres méthodes comme LSB.</p>
+                <p>Cette technique peut être utilisée pour :</p>
+                <ul>
+                    <li>Intégrer des métadonnées d'authenticité dans les images</li>
+                    <li>Créer un canal de communication caché pour l'administrateur</li>
+                    <li>Vérifier l'intégrité des images sans stockage séparé</li>
+                </ul>
+                
+                <h3>7.2 Intégration dans l'interface d'administration</h3>
+                <p>L'intégration de la stéganographie dans l'interface d'administration est visible dans le code, où la fonction test_steno() est appelée lors de la connexion de l'utilisateur, particulièrement dans la classe LogInForm.</p>
+                <p>Cette fonctionnalité représente une couche de sécurité supplémentaire, pratiquement invisible pour un attaquant traditionnel, ajoutant ainsi une protection unique pour les fonctions administratives sensibles.</p>
+            </section>
+            
+            <section id="defis-techniques">
+                <h2>8. Défis techniques rencontrés et solutions apportées</h2>
+                
+                <h3>8.1 Équilibre entre sécurité et expérience utilisateur</h3>
+                <p><strong>Défi:</strong> Implémenter des mesures de sécurité robustes tout en maintenant une expérience utilisateur fluide, particulièrement pour les opérations courantes comme la connexion ou le téléchargement de photos.</p>
+                <p><strong>Solution:</strong> Nous avons adopté une approche de sécurité adaptative qui ajuste le niveau de vérification en fonction du contexte :</p>
+                <ul>
+                    <li>Protection standard mais solide pour les utilisateurs réguliers</li>
+                    <li>Vérifications supplémentaires uniquement pour les opérations sensibles ou les utilisateurs administrateurs</li>
+                    <li>Interface adaptative qui masque la complexité sous-jacente des mécanismes de sécurité</li>
+                </ul>
+                <p>Cette stratégie maintient un bon équilibre entre protection et convivialité, en concentrant les mesures les plus contraignantes sur les opérations à risque élevé.</p>
+                
+                <h3>8.2 Protection des données sensibles</h3>
+                <p><strong>Défi:</strong> Protéger efficacement les informations personnelles des utilisateurs tout en permettant leur utilisation légitime dans l'application.</p>
+                <p><strong>Solution:</strong> Nous avons implémenté une approche multicouche :</p>
+                <ul>
+                    <li>Validation stricte des entrées utilisateur</li>
+                    <li>Stockage sécurisé des mots de passe avec Argon2id</li>
+                    <li>Gestion rigoureuse des sessions avec tokens JWT à durée limitée</li>
+                    <li>Contrôle d'accès basé sur les rôles pour les fonctionnalités d'administration</li>
+                </ul>
+                <p>Ces mesures garantissent que chaque utilisateur n'a accès qu'aux données et fonctionnalités nécessaires à son rôle dans le système.</p>
+            </section>
+            
+            <section id="conclusion">
+                <h2>9. Conclusion et perspectives d'amélioration</h2>
+                <p>Le projet TeaRoom: Shadows a permis d'implémenter une infrastructure de sécurité cryptographique robuste répondant aux exigences du RGPD et aux principes fondamentaux de la CIA (Confidentialité, Intégrité, Disponibilité). L'approche modulaire et multi-couches adoptée assure une protection en profondeur des données sensibles, tout en maintenant une expérience utilisateur fluide et intuitive.</p>
+                
+                <p>Les principales réalisations du projet comprennent :</p>
+                <ul>
+                    <li>Un système d'authentification sécurisé avec protection contre les attaques par force brute</li>
+                    <li>Un mécanisme de protection des données personnelles, notamment les photos</li>
+                    <li>Des vérifications d'identité renforcées pour l'administrateur Bob Thomas</li>
+                    <li>Une protection efficace contre l'usurpation d'identité et le spoofing</li>
+                    <li>Un système innovant de vérification d'intégrité des photos avec stéganographie</li>
+                </ul>
+                <p>Ces mesures de sécurité placent TeaRoom parmi les applications respectant les meilleures pratiques actuelles en matière de protection des données personnelles.</p>
+                
+                <h3>Perspectives d'amélioration:</h3>
+                
+                <h4>Renforcement de la cryptographie</h4>
+                <ul>
+                    <li>Mise en place de chiffrement complet des données sensibles au repos</li>
+                    <li>Rotation périodique des clés cryptographiques</li>
+                    <li>Implémentation de signatures numériques pour garantir l'authenticité des données</li>
+                </ul>
+                
+                <h4>Authentification multi-facteurs</h4>
+                <ul>
+                    <li>Ajout d'options d'authentification à deux facteurs pour tous les utilisateurs</li>
+                    <li>Intégration de technologies comme WebAuthn/FIDO2 pour l'authentification sans mot de passe</li>
+                    <li>Support des clés de sécurité physiques pour l'administrateur</li>
+                </ul>
+                
+                <h4>Audit et journalisation avancés</h4>
+                <ul>
+                    <li>Mise en place d'un système de journalisation complet des activités sensibles</li>
+                    <li>Détection d'anomalies basée sur les patterns de comportement</li>
+                    <li>Alertes en temps réel pour les activités suspectes</li>
+                </ul>
+                
+                <h4>Préparation à la cryptographie post-quantique</h4>
+                <ul>
+                    <li>Évaluation des vulnérabilités potentielles face aux ordinateurs quantiques</li>
+                    <li>Planification de la migration vers des algorithmes résistants aux attaques quantiques</li>
+                    <li>Implémentation d'une architecture crypto-agile permettant des transitions fluides</li>
+                </ul>
+                
+                <h4>Conformité RGPD automatisée</h4>
+                <ul>
+                    <li>Système de gestion des consentements utilisateur</li>
+                    <li>Automatisation des processus liés au droit à l'oubli</li>
+                    <li>Portabilité des données simplifiée pour les utilisateurs</li>
+                </ul>
+                
+                <p>TeaRoom: Shadows constitue ainsi une base solide et sécurisée pour l'application, offrant un niveau de protection adapté aux exigences actuelles tout en anticipant les évolutions futures des menaces et de la réglementation. Les améliorations proposées permettront de maintenir ce niveau de sécurité face à l'évolution constante du paysage des cybermenaces.</p>
+            </section>
+            
+            <!-- Navigation entre documents -->
+            <div class="document-navigation">
+                <a href="index.html" class="prev-doc">← Retour à l'accueil</a>
+                <a href="justification-technique.html" class="next-doc">Document suivant: Justification Technique →</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Bouton de retour en haut de page -->
+    <button id="back-to-top" aria-label="Retour en haut de page">↑</button>
+    
+    <footer>
+        <p>&copy; 2025 TeaRoom: Shadows - Bachelor 1 Cybersécurité</p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/theme-switcher.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/toc-generator.js"></script>
+    <script src="js/print.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script src="js/MathJax.js"></script>
+    
+    <!-- Script pour la barre de progression -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressIndicator = document.querySelector('.progress-indicator');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                
+                progressIndicator.style.width = scrollPercent + '%';
+            });
+        });
+    </script>
+</body>
+</html> 

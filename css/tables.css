@@ -1,0 +1,122 @@
+/* Styles pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    display: block;
+    max-width: fit-content;
+    border-radius: 4px;
+}
+
+/* Pour les petits écrans, permettre le défilement horizontal */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+        margin: 1.5rem 0;
+    }
+    
+    table {
+        min-width: 600px;
+    }
+}
+
+/* En-têtes de tableau */
+thead {
+    background-color: var(--heading-color);
+    color: white;
+}
+
+th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Corps du tableau */
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+body.dark-mode tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Dernière ligne du tableau sans bordure */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Tableaux avec bordures */
+table.bordered th,
+table.bordered td {
+    border: 1px solid var(--border-color);
+}
+
+/* Tableaux compacts */
+table.compact th,
+table.compact td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Tableaux responsive avec données empilées sur mobile */
+@media (max-width: 576px) {
+    table.responsive {
+        display: block;
+    }
+    
+    table.responsive thead {
+        display: none;
+    }
+    
+    table.responsive tbody,
+    table.responsive tr {
+        display: block;
+    }
+    
+    table.responsive tr {
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+    
+    table.responsive td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    table.responsive td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        padding-right: 1rem;
+    }
+    
+    table.responsive td:last-child {
+        border-bottom: none;
+    }
+} 

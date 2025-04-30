@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation - TeaRoom: Shadows</title>
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="vendor/prism.css">
+    <style>
+        /* Styles spécifiques (optionnels) pour la page de présentation */
+        .presentation-content {
+            max-width: 1000px; /* Légèrement plus large ? */
+            margin: 2rem auto; /* Centrer */
+            padding: 1rem 2rem;
+        }
+        .presentation-content section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .presentation-content section:last-child {
+            border-bottom: none;
+        }
+        .code-explanation {
+            font-size: 0.9em;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            opacity: 0.8;
+            padding-left: 1rem;
+        }
+        .presentation-content h2 {
+             border-bottom: 2px solid var(--accent-color);
+             padding-bottom: 0.5rem;
+             margin-bottom: 1.5rem;
+        }
+         .presentation-content ul li { margin-bottom: 0.75rem; }
+         .presentation-content ul ul { margin-top: 0.5rem; margin-bottom: 0.75rem;}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/images/logo.svg" alt="TeaRoom: Shadows Logo" class="logo">
+            <h1>Présentation: TeaRoom Shadows</h1>
+        </div>
+        <button id="theme-toggle" aria-label="Basculer mode clair/sombre">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </header>
+
+    <main class="presentation-content">
+
+        <section id="pres-intro">
+            <h2>1. Introduction & Contexte (1-2 min)</h2>
+            <ul>
+                <li>Bienvenue ! Présentation de <strong>TeaRoom: Shadows</strong> : Sécurisation Cryptographique.</li>
+                <li><strong>Contexte :</strong> Application Anvil "TeaRoom" (salon de thé).</li>
+                <li><strong>Problème :</strong> Risques Sécurité (RGPD, Données Perso, Fuites). <span style="color: red; font-weight: bold;">Responsabilité Civile !</span></li>
+                <li><strong>Solution :</strong> Notre projet - Focus sur CIA (Confidentialité, Intégrité, Disponibilité).</li>
+                <li><strong>Support :</strong> Cette documentation interactive (Navigation, Thème...).</li>
+            </ul>
+            <p style="text-align: right;"><a href="index.html" target="_blank">Voir l'accueil du site ➡️</a></p>
+        </section>
+
+        <section id="pres-fonctionnalites">
+            <h2>2. Fonctionnalités & Sécurité Utilisateur (3 min)</h2>
+            <p>Comment la sécurité s'intègre aux fonctionnalités vues par l'utilisateur (réponse aux <em>user stories</em> du CDC) :</p>
+            <ul>
+                <li><strong>Inscription/Connexion :</strong>
+                    <ul>
+                        <li>Validation force mot de passe (Client). <em>(Réf Code: <code>SignUpForm.check_password_strength</code>)</em></li>
+                        <li>Protection force brute (Server - 3 essais max). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Rapport]</a> <em>(Réf Code: <code>routes/session/login.py</code>)</em></li>
+                    </ul>
+                </li>
+                <li><strong>Gestion de Profil & Données :</strong>
+                    <ul>
+                        <li>Modification profil sécurisée (re-auth via mdp). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Rapport]</a> <em>(Réf Code: Client <code>Edit_Profile</code> -> <code>user_controller.verify_password</code>)</em></li>
+                        <li>Stockage sécurisé des photos (BLOBs). <a href="justification-technique.html#protection-donnees" target="_blank">[Pourquoi BLOBs?]</a> <em>(Réf Code: Server <code>db.py</code>, <code>process_image</code>)</em></li>
+                        <li>Suppression compte (Droit à l'oubli). <em>(Réf Code: Client <code>Edit_Profile</code> -> <code>user_controller.delete_user</code>)</em></li>
+                    </ul>
+                </li>
+                 <li><strong>Logout Sécurisé :</strong>
+                    <ul>
+                       <li>Nettoyage `sessionStorage` (Client). <em>(Réf Code: Client <code>session_controller.logout</code>)</em></li>
+                       <li>Évite persistance token et spoofing.</li>
+                    </ul>
+                </li>
+                <li><strong>Rôle Administrateur (Bob Thomas) :</strong>
+                    <ul>
+                       <li>Droits étendus (voir/suppr users). <a href="rapport-final.html#contenu-principal" target="_blank">[Détails Admin]</a></li>
+                       <li>Vérification via JWT. <em>(Réf Code: Client <code>Dashboard</code>, Server `@require_jwt`/`request.is_admin`)</em></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="pres-securite">
+            <h2>3. Mécanismes de Sécurité Clés (5-6 min)</h2>
+            <p>Les choix techniques majeurs (réponse aux exigences techniques du CDC) :</p>
+            <ul>
+                <li><strong>Hachage Mots de Passe: Argon2id</strong>
+                    <ul>
+                        <li><strong>Exigence CDC :</strong> Hachage sécurisé.</li>
+                        <li><strong>Pourquoi ?</strong> Standard moderne, résistance GPU/ASIC. <a href="justification-technique.html#authentification" target="_blank">[Voir Comparaison vs bcrypt...]</a></li>
+                        <li><pre><code class="language-python"># Server: routes/session/login.py (Vérification)
+try:
+    ph.verify(user.password, password) # 'user.password' est le hash Argon2id stocké
+    # ... Success
+except exceptions.VerifyMismatchError:
+    # ... Failure</code></pre>
+                        <p class="code-explanation">Vérifie le mot de passe fourni contre le hash sécurisé stocké. Échoue en toute sécurité si différent.</p></li>
+                        <li><em>(Réf Code Complet: Server <code>PasswordHasher</code>)</em></li>
+                    </ul>
+                </li>
+                <li><strong>Gestion de Session: JWT (JSON Web Tokens)</strong>
+                    <ul>
+                        <li><strong>Exigence CDC :</strong> Authentification robuste, anti-usurpation.</li>
+                        <li><strong>Pourquoi ?</strong> Stateless, scalabilité, infos user embarquées. <a href="justification-technique.html#authentification" target="_blank">[Voir Justification]</a></li>
+                         <li><pre><code class="language-python"># Server: routes/session/login.py (Création)
+token = jwt.encode({
+        "user_id": user.id,
+        "is_admin": user.is_admin,
+        "exp": datetime.now(timezone.utc) + timedelta(hours=1) # Expiration 1h
+    }, JWT_SECRET, algorithm="HS256")</code></pre>
+                        <p class="code-explanation">Crée un token signé contenant ID, rôle admin, et une date d'expiration.</p></li>
+                         <li><em>(Réf Code Complet: Client `sessionStorage`, Server `@require_jwt`)</em></li>
+                    </ul>
+                </li>
+                 <li><strong>Gestion Clé Secrète JWT :</strong>
+                    <ul>
+                         <li><strong>Réponse au CDC ("obfuscation") :</strong> Bonne pratique moderne = stockage sécurisé via variable d'environnement.</li>
+                         <li><pre><code class="language-python"># Server: app.py / db.py
+SECRET_KEY = os.getenv("SECRET_KEY")
+JWT_SECRET = os.getenv("SECRET_KEY") # Utilisée pour signer/vérifier JWT</code></pre>
+                         <p class="code-explanation">La clé secrète n'est pas dans le code, mais chargée depuis l'environnement serveur.</p></li>
+                         <li><a href="justification-technique.html#protection-donnees" target="_blank">[Bonnes Pratiques]</a></li>
+                    </ul>
+                </li>
+                <li><strong>Protection/Intégrité Photos & Stéganographie :</strong>
+                     <ul>
+                        <li><strong>Exigence CDC (double) :</strong> Intégrité photo ET utilisation stégano.</li>
+                        <li><strong>Intégrité :</strong> Stockage BLOB limite certains risques. Hachage serait une amélioration future. <a href="justification-technique.html#protection-donnees" target="_blank">[Justification BLOB]</a></li>
+                        <li><strong>Utilisation Stégano :</strong> Fonction `test_steno` implémentée (canal admin ?). <a href="rapport-final.html#steganographie" target="_blank">[Détails Concept]</a> <em>(Réf Code: Client <code>LoginForm</code> appelant <code>test_steno</code>)</em></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="pres-ameliorations">
+            <h2>4. Améliorations & Vision Future (2-3 min)</h2>
+            <p>Anticipation et prochaines étapes pour renforcer encore la sécurité :</p>
+            <ul>
+                <li><strong>Authentification Multi-Facteurs (MFA)</strong>
+                    <ul>
+                        <li><strong>Réponse CDC :</strong> "Garantir totalement" l'identité admin.</li>
+                        <li>Priorité haute pour renforcer l'accès. <a href="securite-recommandations.html#recommandations-securite" target="_blank">[Voir Recommandations]</a></li>
+                    </ul>
+                </li>
+                <li><strong>Cryptographie Post-Quantique (PQC)</strong>
+                     <ul>
+                        <li><strong>Réponse CDC :</strong> Anticiper la menace quantique.</li>
+                        <li>Stratégie : Crypto-agilité, veille sur standards NIST (Kyber, Dilithium...). <a href="informatique-quantique.html#transition-post-quantique" target="_blank">[Notre Stratégie PQC]</a></li>
+                    </ul>
+                </li>
+                <li><strong>Sécurité Réseau (Déploiement)</strong>
+                    <ul>
+                         <li><strong>Réponse CDC :</strong> Recommandations protocoles/certificats.</li>
+                         <li>HTTPS/TLS systématique, HSTS, évaluation pinning certificat.</li>
+                    </ul>
+                </li>
+                 <li><strong>Autres :</strong> Journalisation centralisée, Tests sécurité CI/CD... <a href="securite-recommandations.html#plan-action" target="_blank">[Plan d'Action Complet]</a></li>
+            </ul>
+        </section>
+
+         <section id="pres-conclusion">
+            <h2>5. Conclusion (1 min)</h2>
+            <ul>
+                <li><strong>TeaRoom: Shadows :</strong> Sécurité robuste alignée RGPD/CIA.</li>
+                <li><strong>Réponse au CDC :</strong> Mécanismes modernes (Argon2id, JWT), justification des choix, anticipation (PQC).</li>
+                <li><strong>Processus Démontré :</strong> Implémentation (Anvil) et Documentation (ce site).</li>
+            </ul>
+            <p style="font-weight: bold; text-align: center; margin-top: 2rem;">Merci. Questions ?</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TeaRoom: Shadows</p>
+    </footer>
+
+    <script src="js/theme-switcher.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script>
+        // Optionnel: Forcer Prism si besoin, sinon il s'active souvent seul.
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //    Prism.highlightAll();
+        // });
+    </script>
+</body>
+</html> 

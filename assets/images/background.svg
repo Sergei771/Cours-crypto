@@ -1,0 +1,29 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="120" height="120" patternUnits="userSpaceOnUse">
+      <!-- Light grid background -->
+      <rect width="120" height="120" fill="#f8f8f8"/>
+      
+      <!-- Subtle grid lines -->
+      <path d="M 120 0 L 0 0 L 0 120" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+      
+      <!-- Tea leaf pattern (simplified) -->
+      <path d="M60,30 C65,20 55,15 60,10 C65,20 75,15 70,30 Z" 
+            fill="#16C79A" fill-opacity="0.05" transform="rotate(0 60 60)"/>
+      <path d="M30,60 C35,50 25,45 30,40 C35,50 45,45 40,60 Z" 
+            fill="#16C79A" fill-opacity="0.05" transform="rotate(90 30 60)"/>
+      <path d="M60,90 C65,80 55,75 60,70 C65,80 75,75 70,90 Z" 
+            fill="#16C79A" fill-opacity="0.05" transform="rotate(180 60 90)"/>
+      <path d="M90,60 C95,50 85,45 90,40 C95,50 105,45 100,60 Z" 
+            fill="#16C79A" fill-opacity="0.05" transform="rotate(270 90 60)"/>
+
+      <!-- Subtle security symbols -->
+      <circle cx="30" cy="30" r="5" fill="#0F3460" fill-opacity="0.03"/>
+      <circle cx="90" cy="90" r="5" fill="#0F3460" fill-opacity="0.03"/>
+      <path d="M90,30 L95,25 L90,20 L85,25 Z" fill="#0F3460" fill-opacity="0.03"/>
+      <path d="M30,90 L35,85 L30,80 L25,85 Z" fill="#0F3460" fill-opacity="0.03"/>
+    </pattern>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#grid)" />
+</svg> 

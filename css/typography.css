@@ -1,0 +1,138 @@
+/* Importation des polices (commentée pour l'instant, à décommenter si hébergées localement) */
+/*
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+*/
+
+/* Polices système */
+:root {
+    --font-heading: 'Montserrat', 'Open Sans', sans-serif;
+    --font-body: 'Inter', 'Roboto', sans-serif;
+    --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Hiérarchie typographique */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+h1 {
+    font-size: 2rem; /* 32px */
+}
+
+h2 {
+    font-size: 1.5rem; /* 24px */
+    margin-top: 2rem;
+}
+
+h3 {
+    font-size: 1.25rem; /* 20px */
+    margin-top: 1.5rem;
+}
+
+h4 {
+    font-size: 1.125rem; /* 18px */
+    margin-top: 1.25rem;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 1rem; /* 16px */
+}
+
+p {
+    margin-bottom: 1rem;
+    max-width: 70ch; /* Environ 70-75 caractères par ligne */
+}
+
+small, .text-small {
+    font-size: 0.875rem; /* 14px */
+}
+
+/* Liens */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Blocs de code */
+pre, code {
+    font-family: var(--font-code);
+    background-color: var(--code-bg);
+    border-radius: 4px;
+}
+
+code {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+pre code {
+    padding: 0;
+    background-color: transparent;
+}
+
+/* Listes */
+ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Blocs de citation */
+blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-primary);
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+th {
+    background-color: var(--border-color);
+    font-weight: 600;
+    text-align: left;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+body.dark-mode tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+} 

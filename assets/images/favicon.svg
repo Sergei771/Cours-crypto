@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tea cup (simplified) -->
+  <path d="M7,12 C7,10 12,10 16,10 C20,10 25,10 25,12 L25,22 C25,24 22,24 16,24 C10,24 7,24 7,22 Z" 
+        fill="#ffffff" stroke="#16C79A" stroke-width="2"/>
+  
+  <!-- Cup handle (simplified) -->
+  <path d="M25,15 C28,15 29,17 29,18 C29,19 28,21 25,21" 
+        fill="none" stroke="#16C79A" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Tea liquid (simplified) -->
+  <path d="M9,14 C9,13 12,13 16,13 C20,13 23,13 23,14 L23,20 C23,21 20,21 16,21 C12,21 9,21 9,20 Z" 
+        fill="#0F3460" fill-opacity="0.7"/>
+  
+  <!-- Security element (small lock) -->
+  <circle cx="16" cy="17" r="3" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="1,1"/>
+</svg> 

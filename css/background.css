@@ -1,0 +1,100 @@
+/* 
+ * Background Styles
+ * Defines background patterns and gradients for the site
+ */
+
+:root {
+  --bg-pattern-opacity: 0.03;
+  --bg-gradient-start: var(--color-bg);
+  --bg-gradient-end: var(--color-bg-secondary);
+}
+
+body {
+  position: relative;
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 25px 25px, var(--bg-accent) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, var(--bg-accent) 2%, transparent 0%);
+  background-size: 100px 100px;
+  background-attachment: fixed;
+}
+
+/* Subtle grid pattern overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(var(--color-text) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-text) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: var(--bg-pattern-opacity);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Dark mode adjustments */
+.dark-mode {
+  --bg-pattern-opacity: 0.05;
+  --bg-gradient-start: var(--color-bg-dark);
+  --bg-gradient-end: var(--color-bg-secondary-dark);
+}
+
+/* Animated subtle gradient for featured sections */
+.featured-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--color-accent-rgb), 0.05) 0%,
+    rgba(var(--color-accent-rgb), 0.1) 25%,
+    rgba(var(--color-accent-rgb), 0.05) 50%,
+    rgba(var(--color-accent-rgb), 0) 100%
+  );
+  z-index: -1;
+  animation: featuredGradient 15s linear infinite;
+}
+
+@keyframes featuredGradient {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Effet de flou pour le fond d'écran en arrière-plan */
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Animation subtile pour le fond d'écran */
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+
+/* Active l'animation en mode préférence réduite de mouvement désactivée */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation: backgroundShift 60s linear infinite;
+  }
+} 

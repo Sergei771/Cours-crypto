@@ -1,0 +1,598 @@
+/* Imports */
+@import url('background.css');
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Variables pour le mode clair */
+    --bg-primary: #FFFFFF;
+    --text-primary: #1A1A2E;
+    --heading-color: #0F3460;
+    --accent-color: #16C79A;
+    --link-color: #3282B8;
+    --code-bg: #F5F5F5;
+    --border-color: #E0E0E0;
+    
+    /* Variables communes */
+    --header-height: 4rem;
+    --footer-height: 3rem;
+    --sidebar-width: 280px;
+    --max-content-width: 1100px;
+    --card-radius: 8px;
+    --transition-speed: 0.3s;
+    --accent-color-rgb: 22, 199, 154; /* Valeurs RGB pour #16C79A */
+}
+
+body {
+    font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 3rem;
+    margin-right: 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    position: relative;
+    top: 2px;
+    margin-bottom: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav li {
+    margin-left: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: color var(--transition-speed), background-color var(--transition-speed);
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent-color);
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    width: 100%;
+    font-weight: 500;
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+}
+
+/* Styles de la page d'accueil */
+.home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.intro h2 {
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+}
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.document-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.document-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.document-card h3 {
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.document-card p {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color var(--transition-speed);
+}
+
+.btn:hover {
+    background-color: #14b389;
+    transform: translateY(-2px);
+}
+
+/* Styles des pages de document */
+.document-container {
+    display: flex;
+    position: relative;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    background-color: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 50;
+}
+
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    left: 1rem;
+    top: calc(var(--header-height) + 1rem);
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 60;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.document-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem 2rem 2rem 4rem;
+    width: calc(100% - var(--sidebar-width));
+}
+
+/* Table des matières (styles améliorés) */
+.toc-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--heading-color); /* Utilisation de la variable pour cohérence */
+    padding-left: 0.5rem; /* Léger retrait du titre */
+    border-left: 3px solid var(--accent-color); /* Marqueur visuel pour le titre */
+}
+
+.toc-list {
+    list-style: none;
+    padding-left: 0; /* Supprimer le padding par défaut */
+}
+
+.toc-sublist {
+    list-style: none;
+    margin-left: 1rem; /* Indentation de base pour sous-listes */
+    padding-left: 1rem; /* Espace supplémentaire et ligne visuelle */
+    border-left: 1px solid var(--border-color); /* Ligne verticale pour hiérarchie */
+}
+
+.toc-item {
+    margin-bottom: 0.25rem; /* Espacement vertical réduit entre items */
+}
+
+.toc-link {
+    display: block;
+    padding: 0.4rem 0.5rem; /* Augmentation du padding vertical et horizontal */
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color var(--transition-speed), background-color var(--transition-speed), border-left-color var(--transition-speed);
+    border-radius: 4px; /* Coins légèrement arrondis */
+    border-left: 3px solid transparent; /* Espace réservé pour la bordure active */
+    font-size: 0.9rem; /* Taille de police légèrement réduite */
+    cursor: pointer;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-speed), visibility var(--transition-speed), background-color var(--transition-speed), transform var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toc-link:hover {
+    color: var(--accent-color);
+    background-color: rgba(var(--accent-color-rgb), 0.05); /* Fond léger au survol */
+    border-left-color: var(--accent-color); /* Bordure au survol */
+}
+
+.toc-link.active {
+    color: var(--accent-color);
+    font-weight: 600; /* Texte en gras pour l'élément actif */
+    background-color: rgba(var(--accent-color-rgb), 0.1); /* Fond plus prononcé pour l'actif */
+    border-left-color: var(--accent-color); /* Bordure gauche marquée pour l'actif */
+}
+
+.toc-toggle {
+    display: none;
+    margin-bottom: 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+/* Barre de progression */
+.progress-bar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-color);
+    z-index: 90;
+}
+
+.progress-indicator {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0;
+    transition: width 0.1s;
+}
+
+/* Bouton de retour en haut de page */
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-speed), visibility var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    transform: scale(1.1);
+    background-color: #14b389;
+}
+
+/* Boutons d'action (modifiés) */
+.action-buttons {
+    /* Suppression du positionnement fixe */
+    /* position: fixed; */
+    /* bottom: 2rem; */
+    /* left: 2rem; */
+    /* z-index: 90; */
+    /* flex-direction: column; */
+
+    /* Nouveaux styles pour l'intégration dans le flux */
+    display: flex; /* Maintient flex pour aligner les boutons */
+    gap: 1rem; /* Espace entre les boutons */
+    margin-top: 1.5rem; /* Espace après le H1 */
+    margin-bottom: 2rem; /* Espace avant le contenu suivant */
+}
+
+.action-buttons button {
+    /* Suppression des styles de boutons ronds */
+    /* border-radius: 50%; */
+    /* width: 3rem; */
+    /* height: 3rem; */
+    /* font-size: 1.2rem; */
+    /* display: flex; */ /* Déjà flex par défaut */
+    /* align-items: center; */
+    /* justify-content: center; */
+
+    /* Nouveaux styles de boutons */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px; /* Coins arrondis classiques */
+    padding: 0.5rem 1rem; /* Padding intérieur */
+    font-size: 0.9rem; /* Taille de police ajustée */
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: inline-flex; /* Pour aligner icône et texte */
+    align-items: center; /* Alignement vertical icône/texte */
+    gap: 0.5rem; /* Espace entre icône et texte */
+}
+
+.action-buttons button:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color); /* Change la couleur de la bordure au survol */
+    transform: translateY(-2px); /* Léger décalage vers le haut */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Icônes dans les boutons */
+.action-buttons button span {
+    font-size: 1.1rem; /* Taille de l'icône */
+}
+
+/* Ancres des titres */
+.has-anchor {
+    position: relative;
+}
+
+.anchor-link {
+    position: absolute;
+    margin-left: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+
+.has-anchor:hover .anchor-link {
+    opacity: 0.6;
+}
+
+/* Navigation entre documents */
+.document-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.prev-doc, .next-doc {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--link-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.prev-doc:hover, .next-doc:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Styles du thème switcher */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    transition: background-color var(--transition-speed);
+}
+
+#theme-toggle:hover {
+    background-color: var(--border-color);
+}
+
+/* Styles du footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PDF Generation Feedback */
+body.generating-pdf::after {
+    content: 'Génération du PDF...';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 1000; /* Ensure it's on top */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+body.generating-pdf::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Alternative: Spinner Style (comment out the text style above if using this) */
+/*
+body.generating-pdf::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: pdf-spinner 0.8s linear infinite;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+body.generating-pdf::before {
+    opacity: 1;
+    visibility: visible;
+}
+@keyframes pdf-spinner {
+    to { transform: rotate(360deg); }
+}
+body.generating-pdf::after { 
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.3);
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+body.generating-pdf::after { 
+    opacity: 1; visibility: visible; 
+}
+*/ 
+
+/* Custom Scrollbar Styles (WebKit/Blink browsers) */
+::-webkit-scrollbar {
+    width: 10px; /* Largeur pour scrollbar verticale */
+    height: 10px; /* Hauteur pour scrollbar horizontale */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Fond de la piste */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--border-color); /* Couleur du curseur */
+    border-radius: 5px;
+    border: 2px solid var(--bg-primary); /* Espace autour du curseur (couleur du fond) */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color); /* Couleur du curseur au survol */
+}
+
+/* Appliquer aussi à la sidebar si elle scrolle */
+.sidebar::-webkit-scrollbar-track {
+    background: transparent; /* Assurer la transparence dans la sidebar */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+     background-color: var(--border-color); 
+     border: 2px solid var(--bg-primary); /* Utiliser la couleur de fond de la sidebar */
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+     background-color: var(--accent-color);
+}
+
+/* Styles pour Firefox (limités) */
+* {
+  scrollbar-width: thin; /* thin | auto | none */
+  scrollbar-color: var(--border-color) transparent; /* thumb track */
+}
+
+.sidebar {
+    scrollbar-color: var(--border-color) transparent; /* Appliquer à la sidebar aussi */
+}
+
+/* Styles spécifiques pour la carte de présentation */
+.presentation-highlight {
+    border-color: var(--accent-color); /* Bordure plus visible */
+    background-color: rgba(var(--accent-color-rgb), 0.03); /* Très léger fond coloré */
+    border-width: 2px;
+    max-width: 550px; /* Augmenté de 450px */
+    width: 100%; /* Prendre la largeur dispo jusqu'au max-width */
+    padding-top: 1rem;    /* Padding vertical réduit */
+    padding-bottom: 1rem; /* Padding vertical réduit */
+    padding-left: 1.5rem; /* Conserver padding horizontal */
+    padding-right: 1.5rem;/* Conserver padding horizontal */
+}
+
+.presentation-highlight:hover {
+    box-shadow: 0 12px 20px rgba(var(--accent-color-rgb), 0.2); /* Ombre accentuée au survol */
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Section pour la carte de présentation mise en avant */
+.presentation-feature {
+    display: flex; /* Utiliser flexbox pour centrer facilement */
+    justify-content: center; /* Centrer horizontalement */
+    margin-bottom: 2rem; /* Ajouter de l'espace avant la grille */
+} 

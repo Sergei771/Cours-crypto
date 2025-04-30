@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <pattern id="teacup-pattern" patternUnits="userSpaceOnUse" width="300" height="300">
+      <path d="M150 100 Q170 80 190 100 Q210 120 230 100 L240 130 Q230 150 190 150 Q150 150 140 130 Z" fill="none" stroke="rgba(100,100,100,0.05)" stroke-width="1.5"/>
+      <path d="M170 150 Q190 170 210 150 L210 170 Q190 190 170 170 Z" fill="none" stroke="rgba(100,100,100,0.05)" stroke-width="1.5"/>
+      <circle cx="190" cy="80" r="15" fill="none" stroke="rgba(100,100,100,0.03)" stroke-width="1.5"/>
+      <path d="M160 60 Q190 40 220 60" fill="none" stroke="rgba(100,100,100,0.03)" stroke-width="1.5"/>
+    </pattern>
+    <radialGradient id="subtle-gradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="rgba(245,245,245,0.8)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </radialGradient>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="white"/>
+  <rect width="100%" height="100%" fill="url(#teacup-pattern)" opacity="0.7"/>
+  <rect width="100%" height="100%" fill="url(#subtle-gradient)" opacity="0.6"/>
+  
+  <!-- Subtle Japanese-inspired aesthetic elements -->
+  <path d="M0 300 Q300 250 600 300 Q900 350 1200 300" fill="none" stroke="rgba(100,100,100,0.04)" stroke-width="2"/>
+  <path d="M0 600 Q300 550 600 600 Q900 650 1200 600" fill="none" stroke="rgba(100,100,100,0.04)" stroke-width="2"/>
+  <path d="M0 900 Q300 850 600 900 Q900 950 1200 900" fill="none" stroke="rgba(100,100,100,0.04)" stroke-width="2"/>
+</svg> 

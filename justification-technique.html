@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justification Technique - TeaRoom: Shadows</title>
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="vendor/prism.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/images/logo.svg" alt="TeaRoom: Shadows Logo" class="logo">
+            <h1>Justification Technique</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="rapport-final.html">Rapport Final</a></li>
+                <li><a href="justification-technique.html" class="active">Justification Technique</a></li>
+                <li><a href="securite-recommandations.html">Sécurité et Recommandations</a></li>
+                <li><a href="informatique-quantique.html">Informatique Quantique</a></li>
+            </ul>
+            <div class="toc-container mobile-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript -->
+            </div>
+        </nav>
+        <button id="theme-toggle" aria-label="Basculer mode clair/sombre">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </header>
+
+    <div class="breadcrumb-container">
+        <nav aria-label="Fil d'Ariane">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Justification Technique</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="document-container">
+        <!-- Barre latérale avec table des matières (conservée pour desktop, cachée sur mobile) -->
+        <aside class="sidebar">
+            <div class="toc-container desktop-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript DANS LA SIDEBAR -->
+            </div>
+        </aside>
+
+        <!-- Barre de progression -->
+        <div class="progress-bar">
+            <div class="progress-indicator"></div>
+        </div>
+
+        <!-- Contenu principal du document -->
+        <main class="document-content">
+            <h1>Justification Technique - TeaRoom: Shadows</h1>
+
+            <!-- Boutons d'action déplacés ici -->
+            <div class="action-buttons">
+                <button id="print-button" aria-label="Imprimer ou Exporter en PDF">
+                    <span class="print-icon">🖨️</span> Imprimer / PDF
+                </button>
+            </div>
+
+            <section id="introduction">
+                <h2>1. Introduction</h2>
+                <p>
+                    Ce document présente les justifications techniques des choix architecturaux et technologiques effectués dans le cadre du projet TeaRoom: Shadows. Il vise à expliquer les raisons pour lesquelles certaines technologies, algorithmes et approches ont été privilégiés par rapport à d'autres alternatives disponibles.
+                </p>
+                <p>
+                    Les décisions techniques ont été prises en tenant compte des exigences de sécurité, de performance, et de conformité avec les réglementations en vigueur, notamment le RGPD (Règlement Général sur la Protection des Données).
+                </p>
+            </section>
+            
+            <section id="authentification">
+                <h2>2. Choix techniques pour l'authentification</h2>
+                
+                <h3>2.1 Algorithme de hachage Argon2id</h3>
+                <p>
+                    Pour le stockage sécurisé des mots de passe, nous avons opté pour l'algorithme Argon2id, lauréat de la compétition Password Hashing Competition en 2015.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Résistance supérieure aux attaques par force brute utilisant des GPU spécialisés grâce à son importante consommation de mémoire</li>
+                    <li>Protection contre les attaques par canal auxiliaire (side-channel attacks)</li>
+                    <li>Configurabilité permettant d'adapter les paramètres (mémoire, temps de calcul, parallélisme) en fonction de l'évolution des menaces</li>
+                    <li>Meilleure résistance que les alternatives comme PBKDF2, bcrypt ou scrypt face aux attaques matérielles parallèles</li>
+                </ul>
+                <p>
+                    Nous avons configuré Argon2id avec les paramètres suivants:
+                </p>
+                <ul>
+                    <li>Mémoire: 65536 KiB (64 Mo)</li>
+                    <li>Itérations: 3</li>
+                    <li>Parallélisme: 4</li>
+                    <li>Taille du sel: 16 octets</li>
+                    <li>Taille du condensat: 32 octets</li>
+                </ul>
+                <p>
+                    Ces paramètres offrent un compromis optimal entre sécurité et performance sur les serveurs actuels, tout en permettant une adaptation future si nécessaire.
+                </p>
+                
+                <h3>2.2 Tokens JWT pour la gestion des sessions</h3>
+                <p>
+                    Les JSON Web Tokens (JWT) ont été choisis pour gérer les sessions utilisateur dans l'application.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Architecture sans état (stateless) facilitant la scalabilité horizontale de l'application</li>
+                    <li>Réduction de la charge sur la base de données en évitant le stockage des sessions côté serveur</li>
+                    <li>Possibilité d'inclusion d'informations structurées sur l'utilisateur (identifiant, rôle) directement dans le token</li>
+                    <li>Vérification cryptographique de l'intégrité des données avec signature HMAC-SHA256</li>
+                    <li>Validité temporelle limitée (1 heure) réduisant la fenêtre d'exploitation en cas de vol</li>
+                </ul>
+                <p>
+                    Les tokens sont stockés dans le sessionStorage du navigateur, ce qui offre plusieurs avantages par rapport aux alternatives:
+                </p>
+                <ul>
+                    <li>Isolation par origine (même-origine) garantie par le navigateur</li>
+                    <li>Durée de vie limitée à la session de navigation (suppression automatique à la fermeture de l'onglet/fenêtre)</li>
+                    <li>Inaccessibilité depuis le côté serveur ou via des requêtes cross-origin</li>
+                </ul>
+                
+                <h3>2.3 Protection contre les attaques par force brute</h3>
+                <p>
+                    Nous avons implémenté un mécanisme de limitation des tentatives de connexion (rate limiting) pour protéger contre les attaques par force brute.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Limitation à 3 tentatives avant verrouillage temporaire de 15 minutes</li>
+                    <li>Augmentation exponentielle de la durée de verrouillage en cas de récidive</li>
+                    <li>Traçabilité des tentatives échouées pour analyse de sécurité</li>
+                    <li>Implémentation côté serveur pour éviter les contournements côté client</li>
+                </ul>
+                <p>
+                    Ce mécanisme rend pratiquement impossible toute attaque par dictionnaire ou force brute, même avec des mots de passe relativement simples.
+                </p>
+            </section>
+            
+            <section id="protection-donnees">
+                <h2>3. Protection des données personnelles</h2>
+                
+                <h3>3.1 Stockage sécurisé des photos</h3>
+                <p>
+                    Pour le stockage des photos de profil utilisateur, nous avons opté pour une approche de stockage sous forme de BLOB dans la base de données plutôt qu'un stockage sur système de fichiers.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Centralisation de la gestion des permissions d'accès aux images</li>
+                    <li>Élimination des risques de traversée de chemin (path traversal)</li>
+                    <li>Garantie de l'atomicité des opérations CRUD impliquant des images liées à des entités</li>
+                    <li>Simplification des processus de sauvegarde et restauration</li>
+                    <li>Facilitation de la portabilité des données personnelles (conformité RGPD)</li>
+                </ul>
+                <p>
+                    Bien que cette approche puisse avoir un impact sur la performance pour des volumes très importants, notre analyse a montré que pour l'échelle de l'application TeaRoom, les avantages en termes de sécurité et de gestion des données l'emportent largement sur les légères pénalités de performance.
+                </p>
+                
+                <h3>3.2 Gestion des secrets et clés cryptographiques</h3>
+                <p>
+                    Nous avons implémenté une gestion des secrets basée sur les variables d'environnement plutôt que sur des fichiers de configuration ou des constantes codées en dur.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Séparation claire entre code et configuration sensible</li>
+                    <li>Compatibilité avec les pratiques DevSecOps modernes et les plateformes cloud</li>
+                    <li>Possibilité de rotation des clés sans modification du code</li>
+                    <li>Réduction du risque d'exposition des secrets dans les systèmes de contrôle de version</li>
+                    <li>Facilité d'intégration avec des gestionnaires de secrets externes (HashiCorp Vault, AWS KMS, etc.)</li>
+                </ul>
+                <p>
+                    Cette approche s'aligne sur les bonnes pratiques de l'OWASP et facilite la gestion du cycle de vie des secrets, un aspect critique de la sécurité à long terme.
+                </p>
+                
+                <h3>3.3 Vérification à temps constant</h3>
+                <p>
+                    Pour les opérations cryptographiques sensibles, notamment la vérification des mots de passe et des tokens, nous avons implémenté des comparaisons à temps constant.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Protection contre les attaques par timing qui exploitent les différences de temps d'exécution</li>
+                    <li>Élimination des fuites d'information via un canal auxiliaire basé sur le temps</li>
+                    <li>Conformité avec les recommandations du NIST pour les implémentations cryptographiques</li>
+                </ul>
+                <p>
+                    Cette technique défensive est particulièrement importante dans un contexte web où un attaquant peut effectuer de nombreuses mesures pour exploiter de subtiles différences de temps de réponse.
+                </p>
+
+                <h3>3.4 Chiffrement des factures (AES)</h3>
+                <p>
+                    Pour garantir la confidentialité des informations sensibles contenues dans les factures de commande (détails des produits, prix, informations client potentielles), nous avons implémenté un chiffrement symétrique basé sur AES (Advanced Encryption Standard).
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li><strong>Standard Robuste:</strong> AES est un standard mondialement reconnu et recommandé par le NIST, offrant une sécurité éprouvée.</li>
+                    <li><strong>Performance:</strong> Le chiffrement symétrique AES est très performant, adapté au chiffrement/déchiffrement de volumes de données potentiels comme les factures, sans impacter significativement l'expérience.</li>
+                    <li><strong>Confidentialité Renforcée:</strong> Assure que même en cas d'accès non autorisé à la base de données ou aux fichiers de factures, le contenu reste illisible sans la clé de déchiffrement appropriée.</li>
+                    <li><strong>(Optionnel si GCM est utilisé): Authenticité Intégrée (AES-GCM):</strong> Si le mode Galois/Counter Mode (GCM) est utilisé, il fournit également une authentification des données chiffrées, garantissant leur intégrité et leur authenticité en plus de la confidentialité.</li>
+                </ul>
+                <p>
+                    Le choix d'AES (idéalement AES-256) offre un excellent équilibre entre sécurité forte et efficacité pour la protection des données de facturation, conformément aux exigences de protection des données sensibles.
+                </p>
+            </section>
+            
+            <section id="middleware-securite">
+                <h2>4. Architecture du middleware de sécurité</h2>
+                
+                <h3>4.1 Approche par décorateurs</h3>
+                <p>
+                    Nous avons conçu le middleware de sécurité en utilisant une approche par décorateurs Python plutôt que des middlewares monolithiques.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Séparation claire des préoccupations (separation of concerns)</li>
+                    <li>Application granulaire des contrôles de sécurité uniquement là où nécessaire</li>
+                    <li>Amélioration de la lisibilité et de la maintenabilité du code</li>
+                    <li>Facilité d'extension avec de nouvelles vérifications de sécurité</li>
+                    <li>Réduction des risques d'erreurs d'application des contrôles</li>
+                </ul>
+                <p>
+                    Le décorateur @require_jwt utilisé pour la vérification des tokens d'authentification est un exemple parfait de cette approche. Il encapsule toute la logique de vérification et peut être appliqué précisément aux points d'entrée nécessitant une authentification.
+                </p>
+                
+                <h3>4.2 Structure en couches de sécurité</h3>
+                <p>
+                    L'architecture de sécurité de l'application a été conçue en couches multiples (défense en profondeur).
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Réduction de la surface d'attaque par application de plusieurs contrôles consécutifs</li>
+                    <li>Isolation des différentes responsabilités de sécurité dans des modules dédiés</li>
+                    <li>Capacité à évoluer indépendamment pour chaque couche de sécurité</li>
+                    <li>Résistance accrue à la compromission totale en cas de faille dans une couche</li>
+                </ul>
+                <p>
+                    Cette approche s'aligne sur le principe de défense en profondeur recommandé par les standards de sécurité comme ISO 27001 et les recommandations NIST.
+                </p>
+            </section>
+            
+            <section id="steganographie">
+                <h2>5. Implémentation de la stéganographie</h2>
+                
+                <h3>5.1 Choix de la technique: PNG Chunk Insertion</h3>
+                <p>
+                    Pour l'implémentation des fonctionnalités stéganographiques, nous avons opté pour l'insertion de données dans des blocs (chunks) auxiliaires du format PNG.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li><strong>Conformité au Standard PNG:</strong> Utilise des types de chunks définis comme auxiliaires (non critiques) par la spécification PNG, assurant la compatibilité avec la plupart des décodeurs PNG qui ignorent les chunks inconnus.</li>
+                    <li><strong>Moins Détectable par Analyse Simple:</strong> Contrairement à LSB qui modifie les données pixel, cette technique insère des blocs séparés, moins susceptibles d'être détectés par des analyses statistiques basiques sur les pixels.</li>
+                    <li><strong>Capacité Flexible:</strong> La quantité de données insérables dépend de la structure du fichier PNG et des limites de taille des chunks, mais peut être suffisante pour des métadonnées ou des messages courts.</li>
+                    <li><strong>Robustesse Relative:</strong> Les données insérées dans les chunks sont moins susceptibles d'être corrompues par des opérations simples de redimensionnement ou de recompression (selon le type de chunk et l'opération).</li>
+                </ul>
+                <p>
+                   Cette méthode offre une approche discrète et standardisée pour intégrer des données cachées dans les fichiers PNG, adaptée à notre besoin d'un canal secondaire potentiel.
+                </p>
+                
+                <h3>5.2 Intégration comme canal d'authentification secondaire</h3>
+                <p>
+                    L'utilisation de la stéganographie comme canal d'authentification secondaire représente une innovation en matière de sécurité.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Création d'un canal de communication invisible pour les informations d'authentification</li>
+                    <li>Mécanisme de vérification difficilement détectable par un attaquant traditionnel</li>
+                    <li>Séparation du canal principal d'authentification, réduisant le risque de compromission simultanée</li>
+                    <li>Possibilité d'inclure des données dynamiques comme des horodatages ou des nonces</li>
+                </ul>
+                <p>
+                    Ce mécanisme agit comme une forme de contrôle d'authenticité hors bande, renforçant considérablement la sécurité des opérations administratives sensibles.
+                </p>
+            </section>
+            
+            <section id="validation-donnees">
+                <h2>6. Validation et sanitisation des données</h2>
+                
+                <h3>6.1 Validation des entrées utilisateur</h3>
+                <p>
+                    Nous avons implémenté un mécanisme robuste de validation des entrées utilisateur à plusieurs niveaux.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Protection contre les injections SQL, NoSQL et autres attaques par injection</li>
+                    <li>Vérification systématique des types, formats et limites des données</li>
+                    <li>Application du principe de validation positive (whitelisting) plutôt que négative</li>
+                    <li>Réduction des risques de corruption de données ou d'états inconsistants</li>
+                </ul>
+                <p>
+                    Cette approche défensive constitue la première ligne de défense contre de nombreuses vulnérabilités web courantes, notamment celles figurant dans le Top 10 de l'OWASP.
+                </p>
+                
+                <h3>6.2 Traitement sécurisé des fichiers téléchargés</h3>
+                <p>
+                    Le traitement des images téléchargées intègre plusieurs contrôles de sécurité spécifiques.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Vérification du type MIME réel du fichier plutôt que confiance dans l'extension</li>
+                    <li>Validation de l'intégrité structurelle des formats d'image supportés</li>
+                    <li>Limitation de taille pour prévenir les attaques par déni de service</li>
+                    <li>Transformation et réencodage des images pour éliminer tout contenu potentiellement malveillant</li>
+                </ul>
+                <p>
+                    Ces mesures protègent contre les vulnérabilités liées aux téléchargements de fichiers, une source fréquente de failles de sécurité dans les applications web.
+                </p>
+            </section>
+            
+            <section id="conformite-rgpd">
+                <h2>7. Conformité avec le RGPD</h2>
+                
+                <h3>7.1 Minimisation des données</h3>
+                <p>
+                    Notre architecture technique a été conçue selon le principe de minimisation des données exigé par le RGPD.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Collecte limitée aux données strictement nécessaires au fonctionnement du service</li>
+                    <li>Structures de données conçues pour faciliter l'anonymisation ou pseudonymisation</li>
+                    <li>Mécanismes d'effacement sélectif permettant de supprimer des données spécifiques</li>
+                    <li>Séparation claire entre données d'identification et données d'utilisation</li>
+                </ul>
+                <p>
+                    Cette approche réduit les risques juridiques liés au RGPD tout en limitant l'impact potentiel d'une fuite de données.
+                </p>
+                
+                <h3>7.2 Droit à l'oubli</h3>
+                <p>
+                    L'architecture technique intègre nativement les mécanismes nécessaires pour respecter le droit à l'oubli.
+                </p>
+                <h4>Justification:</h4>
+                <ul>
+                    <li>Suppression complète et définitive des données utilisateur via l'API delete-account</li>
+                    <li>Cascade de suppression pour éliminer toutes les données associées</li>
+                    <li>Journalisation de la demande d'effacement sans conserver les données effacées</li>
+                    <li>Mécanismes d'anonymisation pour les données nécessaires à des fins statistiques</li>
+                </ul>
+                <p>
+                    Ces fonctionnalités permettent de répondre rapidement et efficacement aux demandes d'exercice des droits des utilisateurs sans intervention manuelle complexe.
+                </p>
+            </section>
+            
+            <section id="evaluation-alternatives">
+                <h2>8. Évaluation des alternatives considérées</h2>
+                
+                <h3>8.1 Alternatives pour le hachage des mots de passe</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Algorithme</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                            <th>Raison du rejet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PBKDF2</td>
+                            <td>
+                                <ul>
+                                    <li>Certifié NIST</li>
+                                    <li>Large adoption</li>
+                                    <li>Implémentations stables</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Vulnérable aux attaques par GPU</li>
+                                    <li>Consommation mémoire limitée</li>
+                                </ul>
+                            </td>
+                            <td>Résistance insuffisante aux attaques matérielles parallèles</td>
+                        </tr>
+                        <tr>
+                            <td>bcrypt</td>
+                            <td>
+                                <ul>
+                                    <li>Résistance aux GPU</li>
+                                    <li>Adoptée largement</li>
+                                    <li>Paramètre de coût ajustable</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Limitation à 72 octets d'entrée</li>
+                                    <li>Consommation mémoire fixe (4KB)</li>
+                                </ul>
+                            </td>
+                            <td>Limitations de taille d'entrée et consommation mémoire insuffisante</td>
+                        </tr>
+                        <tr>
+                            <td>scrypt</td>
+                            <td>
+                                <ul>
+                                    <li>Forte consommation mémoire</li>
+                                    <li>Résistance aux ASIC</li>
+                                    <li>Paramètres ajustables</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Implémentations moins standardisées</li>
+                                    <li>Vulnérabilités aux attaques par canal auxiliaire</li>
+                                </ul>
+                            </td>
+                            <td>Argon2id offre une meilleure protection contre les attaques par canal auxiliaire</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>8.2 Alternatives pour la gestion des sessions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Solution</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                            <th>Raison du rejet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sessions basées sur les cookies</td>
+                            <td>
+                                <ul>
+                                    <li>Simple à implémenter</li>
+                                    <li>Support natif des navigateurs</li>
+                                    <li>État conservé côté serveur</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Vulnérabilité aux attaques CSRF</li>
+                                    <li>Difficulté de mise à l'échelle horizontale</li>
+                                    <li>Dépendance à la base de données</li>
+                                </ul>
+                            </td>
+                            <td>Complexité accrue pour la scalabilité et problèmes de sécurité CSRF</td>
+                        </tr>
+                        <tr>
+                            <td>OAuth 2.0</td>
+                            <td>
+                                <ul>
+                                    <li>Standard ouvert bien établi</li>
+                                    <li>Support de l'authentification déléguée</li>
+                                    <li>Séparation des rôles</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Complexité d'implémentation</li>
+                                    <li>Surcharge pour une application autonome</li>
+                                    <li>Dépendance à des providers externes</li>
+                                </ul>
+                            </td>
+                            <td>Sur-ingénierie pour les besoins actuels de l'application</td>
+                        </tr>
+                        <tr>
+                            <td>Tokens opaques avec Redis</td>
+                            <td>
+                                <ul>
+                                    <li>Contrôle total sur la validité des tokens</li>
+                                    <li>Possibilité de révocation immédiate</li>
+                                    <li>Support de la mise à l'échelle</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Dépendance à un service externe (Redis)</li>
+                                    <li>Complexité d'infrastructure accrue</li>
+                                    <li>Point unique de défaillance</li>
+                                </ul>
+                            </td>
+                            <td>Complexité opérationnelle excessive pour cette phase du projet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section id="conclusion">
+                <h2>9. Conclusion</h2>
+                <p>
+                    Les choix techniques effectués dans le cadre du projet TeaRoom: Shadows représentent un équilibre réfléchi entre sécurité, performance, maintenabilité et conformité réglementaire. Chaque décision a été prise en considérant:
+                </p>
+                <ul>
+                    <li>Les meilleures pratiques actuelles en matière de sécurité</li>
+                    <li>L'évolution prévisible des menaces et des technologies</li>
+                    <li>Les contraintes opérationnelles et de développement</li>
+                    <li>Les exigences réglementaires, notamment le RGPD</li>
+                </ul>
+                <p>
+                    Cette architecture offre une base solide pour le développement futur de l'application, avec une capacité d'adaptation aux nouveaux défis de sécurité qui pourront émerger. Les composants ont été conçus de manière modulaire, facilitant l'évolution et le renforcement progressif de la sécurité au fil du temps.
+                </p>
+                <p>
+                    TeaRoom: Shadows démontre qu'il est possible de mettre en œuvre des mécanismes de sécurité avancés tout en maintenant une expérience utilisateur fluide et intuitive, sans compromis sur les fonctionnalités essentielles de l'application.
+                </p>
+            </section>
+            
+            <!-- Navigation entre documents -->
+            <div class="document-navigation">
+                <a href="rapport-final.html" class="prev-doc">← Document précédent: Rapport Final</a>
+                <a href="securite-recommandations.html" class="next-doc">Document suivant: Sécurité et Recommandations →</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Bouton de retour en haut de page -->
+    <button id="back-to-top" aria-label="Retour en haut de page">↑</button>
+    
+    <footer>
+        <p>&copy; 2025 TeaRoom: Shadows - Bachelor 1 Cybersécurité</p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/theme-switcher.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/toc-generator.js"></script>
+    <script src="js/print.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script src="js/MathJax.js"></script>
+    <!-- <script src="js/scroll-spy.js"></script> -->
+    
+    <!-- Script pour la barre de progression -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressIndicator = document.querySelector('.progress-indicator');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                
+                progressIndicator.style.width = scrollPercent + '%';
+            });
+        });
+    </script>
+</body>
+</html> 

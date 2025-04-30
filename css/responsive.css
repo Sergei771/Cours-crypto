@@ -1,0 +1,249 @@
+/* Breakpoints
+Mobile: < 768px
+Tablette: 768px - 1024px
+Desktop: > 1024px
+*/
+
+/* Styles de base pour mobile (< 768px) */
+@media (max-width: 767px) {
+    header {
+        padding: 0 1rem;
+    }
+    
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        height: 2rem;
+    }
+    
+    /* Menu hamburger */
+    nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background-color: var(--bg-primary);
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    nav.open {
+        height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 1rem;
+    }
+    
+    nav li {
+        margin: 0.75rem 0;
+    }
+    
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+    }
+    
+    /* Rendre visible le hamburger uniquement sur mobile */
+    .hamburger-menu {
+        width: 30px;
+        height: 20px;
+        position: relative;
+        margin-right: 1rem;
+        cursor: pointer;
+    }
+    
+    .hamburger-menu span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: var(--text-primary);
+        border-radius: 2px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: 0.25s ease-in-out;
+    }
+    
+    .hamburger-menu span:nth-child(1) {
+        top: 0px;
+    }
+    
+    .hamburger-menu span:nth-child(2), .hamburger-menu span:nth-child(3) {
+        top: 9px;
+    }
+    
+    .hamburger-menu span:nth-child(4) {
+        top: 18px;
+    }
+    
+    .hamburger-menu.open span:nth-child(1) {
+        top: 9px;
+        width: 0%;
+        left: 50%;
+    }
+    
+    .hamburger-menu.open span:nth-child(2) {
+        transform: rotate(45deg);
+    }
+    
+    .hamburger-menu.open span:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+    
+    .hamburger-menu.open span:nth-child(4) {
+        top: 9px;
+        width: 0%;
+        left: 50%;
+    }
+    
+    /* Ajustements pour la page d'accueil */
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Ajustements pour les pages de contenu */
+    .document-content {
+        padding: 1rem;
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .sidebar {
+        display: none !important;
+    }
+    
+    .sidebar-toggle {
+        display: none !important;
+    }
+    
+    /* Styles for the ToC inside the mobile nav */
+    .mobile-toc {
+        display: block;
+        padding: 0 1rem;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    /* Hide desktop toc on mobile */
+    .desktop-toc {
+        display: none;
+    }
+
+    /* Responsive Tables */
+    .document-content table {
+        display: block; /* Needed for overflow to work correctly */
+        width: 100%; /* Prevent table from shrinking */
+        overflow-x: auto; /* Enable horizontal scroll */
+        white-space: nowrap; /* Prevent text wrapping inside cells */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        border-collapse: collapse; /* Ensure borders are handled correctly */
+        border-spacing: 0;
+        margin-bottom: 1rem; /* Add space after the table */
+    }
+
+    /* Optional: Style the scrollbar */
+    .document-content table::-webkit-scrollbar {
+        height: 8px;
+    }
+    .document-content table::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+    }
+    .document-content table::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-color);
+    }
+}
+
+/* Styles pour tablette (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Ajustements pour la grille de documents sur la page d'accueil */
+    .documents-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Sidebar plus compacte */
+    .sidebar {
+        width: 220px;
+    }
+    
+    .content-with-sidebar {
+        margin-left: 220px;
+    }
+    
+    /* Hide mobile toc container */
+    .mobile-toc {
+        display: none;
+    }
+    /* Ensure desktop toc is visible */
+    .desktop-toc {
+        display: block;
+    }
+}
+
+/* Styles pour desktop (> 1024px) */
+@media (min-width: 1025px) {
+    /* Grille de documents sur 4 colonnes */
+    .documents-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Largeur du contenu principale */
+    main {
+        max-width: var(--max-content-width);
+    }
+    
+    /* Hamburger menu caché sur desktop */
+    .hamburger-menu, .sidebar-toggle {
+        display: none;
+    }
+    
+    /* Hide mobile toc container */
+    .mobile-toc {
+        display: none;
+    }
+    /* Ensure desktop toc is visible */
+    .desktop-toc {
+        display: block;
+    }
+}
+
+/* Mise en page pour les pages de documents */
+@media (min-width: 768px) {
+    .document-container {
+        display: flex;
+    }
+    
+    .sidebar {
+        width: var(--sidebar-width);
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        bottom: 0;
+        overflow-y: auto;
+        border-right: 1px solid var(--border-color);
+        padding: 1.5rem 1rem;
+        background-color: var(--bg-primary);
+    }
+    
+    .document-content {
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
+        width: calc(100% - var(--sidebar-width));
+    }
+} 

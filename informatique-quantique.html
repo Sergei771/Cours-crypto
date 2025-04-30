@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informatique Quantique - TeaRoom: Shadows</title>
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="vendor/prism.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/images/logo.svg" alt="TeaRoom: Shadows Logo" class="logo">
+            <h1>Informatique Quantique</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="rapport-final.html">Rapport Final</a></li>
+                <li><a href="justification-technique.html">Justification Technique</a></li>
+                <li><a href="securite-recommandations.html">Sécurité et Recommandations</a></li>
+                <li><a href="informatique-quantique.html" class="active">Informatique Quantique</a></li>
+            </ul>
+            <div class="toc-container mobile-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript -->
+            </div>
+        </nav>
+        <button id="theme-toggle" aria-label="Basculer mode clair/sombre">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </header>
+
+    <div class="breadcrumb-container">
+        <nav aria-label="Fil d'Ariane">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Informatique Quantique</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="document-container">
+        <!-- Barre latérale avec table des matières (conservée pour desktop, cachée sur mobile) -->
+        <aside class="sidebar">
+            <div class="toc-container desktop-toc">
+                <h2>Table des matières</h2>
+                <!-- La table des matières sera générée par JavaScript DANS LA SIDEBAR -->
+            </div>
+        </aside>
+
+        <!-- Barre de progression -->
+        <div class="progress-bar">
+            <div class="progress-indicator"></div>
+        </div>
+
+        <!-- Contenu principal du document -->
+        <main class="document-content">
+            <h1>Informatique Quantique et Sécurité Post-Quantique - TeaRoom: Shadows</h1>
+
+            <!-- Boutons d'action déplacés ici -->
+            <div class="action-buttons">
+                <button id="print-button" aria-label="Imprimer ou Exporter en PDF">
+                    <span class="print-icon">🖨️</span> Imprimer / PDF
+                </button>
+            </div>
+
+            <section id="introduction">
+                <h2>1. Introduction à l'informatique quantique</h2>
+                <p>
+                    L'informatique quantique représente un changement de paradigme fondamental dans notre approche du calcul. Contrairement aux ordinateurs classiques qui manipulent des bits (0 ou 1), les ordinateurs quantiques utilisent des qubits qui peuvent exister simultanément dans plusieurs états grâce au principe de superposition quantique.
+                </p>
+                <p>
+                    Ce document explore les implications de l'informatique quantique pour la sécurité des systèmes comme TeaRoom, et plus particulièrement son impact sur les fondations cryptographiques actuelles qui garantissent la protection des données et des communications.
+                </p>
+            </section>
+            
+            <section id="principes-informatique-quantique">
+                <h2>2. Principes fondamentaux de l'informatique quantique</h2>
+                
+                <h3>2.1 Superposition quantique</h3>
+                <p>
+                    La superposition est un principe fondamental de la mécanique quantique qui permet à un qubit d'exister simultanément dans plusieurs états. Alors qu'un bit classique est soit 0 soit 1, un qubit peut être dans une combinaison complexe de ces deux états.
+                </p>
+                <p>
+                    Mathématiquement, l'état général d'un qubit, noté \( |\psi\rangle \) (en notation bra-ket), s'écrit comme une combinaison linéaire des états de base \( |0\rangle \) et \( |1\rangle \) :
+                </p>
+                \[
+                    |\psi\rangle = \alpha |0\rangle + \beta |1\rangle 
+                \]
+                <p>
+                    Ici, \( \alpha \) et \( \beta \) sont des nombres complexes appelés <strong>amplitudes de probabilité</strong>. Le carré de leur module représente la probabilité de mesurer le qubit dans l'état correspondant. Ainsi, la condition de normalisation impose que \( |\alpha|^2 + |\beta|^2 = 1 \), signifiant que la somme des probabilités de trouver le qubit dans l'état 0 ou dans l'état 1 est égale à 1.
+                    C'est cette capacité à exister dans une combinaison d'états qui différencie fondamentalement le qubit du bit classique.
+                </p>
+                <p>
+                    Cette propriété confère aux ordinateurs quantiques une forme de parallélisme intrinsèque : un registre de n qubits peut représenter \( 2^n \) états simultanément, permettant théoriquement d'explorer un espace de solutions exponentiellement plus grand qu'un ordinateur classique.
+                </p>
+                
+                <h3>2.2 Intrication quantique</h3>
+                <p>
+                    L'intrication quantique est un phénomène où deux ou plusieurs qubits deviennent corrélés de manière à ce que l'état de l'un dépend instantanément de l'état de l'autre, quelle que soit la distance qui les sépare. Einstein qualifiait ce phénomène d'« action fantomatique à distance ».
+                </p>
+                <p>
+                    Cette propriété est essentielle pour de nombreux algorithmes quantiques et protocoles de cryptographie quantique, offrant des capacités de calcul et de communication impossibles avec les systèmes classiques.
+                </p>
+                
+                <h3>2.3 Algorithmes quantiques majeurs</h3>
+                <p>
+                    Plusieurs algorithmes quantiques ont été développés avec des implications profondes pour la sécurité :
+                </p>
+                <ul>
+                    <li><strong>Algorithme de Shor (1994) :</strong> Permet la factorisation de grands nombres en temps polynomial, menaçant directement RSA et la cryptographie à clé publique basée sur le problème de factorisation</li>
+                    <li><strong>Algorithme de Grover (1996) :</strong> Permet d'accélérer quadratiquement la recherche dans un espace non structuré, réduisant efficacement la sécurité des clés symétriques</li>
+                    <li><strong>Algorithme HHL :</strong> Pour la résolution de systèmes d'équations linéaires, avec des applications potentielles en cryptanalyse</li>
+                </ul>
+                <p>
+                    Ces algorithmes, bien que nécessitant des ordinateurs quantiques avancés pour être pleinement réalisés, définissent la nature des menaces quantiques contre les systèmes cryptographiques actuels.
+                </p>
+            </section>
+            
+            <section id="menaces-cryptographie">
+                <h2>3. Menaces quantiques sur la cryptographie traditionnelle</h2>
+                
+                <h3>3.1 Impact sur la cryptographie asymétrique</h3>
+                <p>
+                    La cryptographie asymétrique, ou à clé publique, est particulièrement vulnérable aux attaques quantiques :
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Système cryptographique</th>
+                            <th>Fondement mathématique</th>
+                            <th>Impact de l'informatique quantique</th>
+                            <th>Temps estimé pour la compromission</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RSA</td>
+                            <td>Factorisation des nombres entiers</td>
+                            <td>Compromis total via l'algorithme de Shor</td>
+                            <td>Minutes/heures avec un ordinateur quantique suffisamment puissant</td>
+                        </tr>
+                        <tr>
+                            <td>ECC (Cryptographie sur courbes elliptiques)</td>
+                            <td>Problème du logarithme discret sur courbe elliptique</td>
+                            <td>Compromis total via une variante de l'algorithme de Shor</td>
+                            <td>Minutes/heures avec un ordinateur quantique suffisamment puissant</td>
+                        </tr>
+                        <tr>
+                            <td>Diffie-Hellman</td>
+                            <td>Problème du logarithme discret</td>
+                            <td>Compromis total via l'algorithme de Shor</td>
+                            <td>Minutes/heures avec un ordinateur quantique suffisamment puissant</td>
+                        </tr>
+                        <tr>
+                            <td>DSA (Digital Signature Algorithm)</td>
+                            <td>Problème du logarithme discret</td>
+                            <td>Compromis total via l'algorithme de Shor</td>
+                            <td>Minutes/heures avec un ordinateur quantique suffisamment puissant</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    Ces vulnérabilités sont particulièrement préoccupantes car la cryptographie asymétrique est au cœur de la sécurisation des communications sur Internet, notamment pour TLS/SSL, les signatures numériques et les infrastructures à clé publique (PKI).
+                </p>
+                
+                <h3>3.2 Impact sur la cryptographie symétrique</h3>
+                <p>
+                    Les algorithmes de chiffrement symétrique sont généralement plus résistants aux attaques quantiques, mais l'algorithme de Grover réduit efficacement leur sécurité :
+                </p>
+                <p>
+                    Plus précisément, l'algorithme de Grover permet d'accélérer quadratiquement la recherche d'une clé dans un espace non structuré. La complexité d'une recherche exhaustive passe de \( O(N) \) en calcul classique à \( O(\sqrt{N}) \) avec un ordinateur quantique, où \( N \) est le nombre total de clés possibles (par exemple, \( N = 2^k \) pour une clé de \( k \) bits). Par conséquent, la sécurité effective d'un algorithme symétrique est divisée par deux (en termes de bits) :
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Système cryptographique</th>
+                            <th>Sécurité classique</th>
+                            <th>Sécurité post-quantique</th>
+                            <th>Recommandation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AES-128</td>
+                            <td>128 bits de sécurité</td>
+                            <td>64 bits de sécurité (via Grover)</td>
+                            <td>Insuffisant pour le long terme</td>
+                        </tr>
+                        <tr>
+                            <td>AES-256</td>
+                            <td>256 bits de sécurité</td>
+                            <td>128 bits de sécurité (via Grover)</td>
+                            <td>Considéré comme sûr à long terme</td>
+                        </tr>
+                        <tr>
+                            <td>ChaCha20</td>
+                            <td>256 bits de sécurité</td>
+                            <td>128 bits de sécurité (via Grover)</td>
+                            <td>Considéré comme sûr à long terme</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    L'implication pratique est que les longueurs de clé symétriques doivent être doublées (passant de 128 bits à 256 bits par exemple) pour maintenir un niveau de sécurité équivalent (environ 128 bits) face aux attaques quantiques. Cela représente un défi moindre que pour la cryptographie asymétrique, mais reste significatif.
+                </p>
+                
+                <h3>3.3 Impact sur les fonctions de hachage</h3>
+                <p>
+                    Les fonctions de hachage cryptographiques sont également affectées, mais de manière plus limitée :
+                </p>
+                <ul>
+                    <li>Les attaques sur les collisions voient leur complexité réduite via l'algorithme de Grover</li>
+                    <li>SHA-256 offrirait environ 128 bits de sécurité face aux attaques quantiques</li>
+                    <li>Des fonctions comme SHA-384 et SHA-512 resteraient suffisamment sécurisées</li>
+                </ul>
+                <p>
+                    Pour les applications nécessitant une sécurité à long terme, il est recommandé d'utiliser des fonctions de hachage avec des sorties d'au moins 384 bits.
+                </p>
+            </section>
+            
+            <section id="cryptographie-post-quantique">
+                <h2>4. Cryptographie post-quantique</h2>
+                
+                <h3>4.1 Définition et principes</h3>
+                <p>
+                    La cryptographie post-quantique (PQC) désigne les algorithmes cryptographiques conçus pour résister aux attaques d'un ordinateur quantique. Ces algorithmes s'appuient sur des problèmes mathématiques différents, considérés comme difficiles même pour un ordinateur quantique.
+                </p>
+                <p>
+                    Le NIST (National Institute of Standards and Technology) a lancé en 2016 un processus de standardisation des algorithmes post-quantiques qui aboutit progressivement à la sélection des futurs standards.
+                </p>
+                
+                <h3>4.2 Principales familles d'algorithmes post-quantiques</h3>
+                <p>
+                    Plusieurs approches sont explorées pour développer des cryptosystèmes résistants aux ordinateurs quantiques :
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Famille</th>
+                            <th>Principe mathématique</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                            <th>Exemples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cryptographie basée sur les réseaux</td>
+                            <td>Problèmes des plus courts vecteurs (SVP) et des vecteurs les plus proches (CVP)</td>
+                            <td>Performance acceptable, bien étudiée</td>
+                            <td>Grandes tailles de clés</td>
+                            <td>Kyber, NTRU, Dilithium</td>
+                        </tr>
+                        <tr>
+                            <td>Cryptographie basée sur les codes</td>
+                            <td>Problème du décodage des codes correcteurs d'erreurs</td>
+                            <td>Longue histoire d'étude, rapide</td>
+                            <td>Très grandes tailles de clés</td>
+                            <td>Classic McEliece, BIKE</td>
+                        </tr>
+                        <tr>
+                            <td>Cryptographie multivariée</td>
+                            <td>Résolution de systèmes d'équations multivariées</td>
+                            <td>Signatures compactes et rapides</td>
+                            <td>Clés publiques très grandes</td>
+                            <td>Rainbow, GeMSS</td>
+                        </tr>
+                        <tr>
+                            <td>Cryptographie basée sur les isogénies</td>
+                            <td>Problèmes liés aux isogénies entre courbes elliptiques supersingulières</td>
+                            <td>Clés compactes</td>
+                            <td>Opérations plus lentes, nouveauté relative</td>
+                            <td>SIKE (compromis récemment)</td>
+                        </tr>
+                        <tr>
+                            <td>Cryptographie basée sur les hachages</td>
+                            <td>Propriétés de sécurité des fonctions de hachage</td>
+                            <td>Simplicité, fondements bien compris</td>
+                            <td>Grandes signatures, performances limitées</td>
+                            <td>SPHINCS+</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>4.3 Standards émergents</h3>
+                <p>
+                    Le processus de standardisation du NIST a déjà abouti à plusieurs sélections :
+                </p>
+                <ul>
+                    <li><strong>CRYSTALS-Kyber :</strong> Algorithme de chiffrement/KEM (Key Encapsulation Mechanism) basé sur les réseaux, sélectionné comme standard principal</li>
+                    <li><strong>CRYSTALS-Dilithium :</strong> Algorithme de signature numérique basé sur les réseaux</li>
+                    <li><strong>FALCON :</strong> Algorithme de signature alternative basé sur les réseaux</li>
+                    <li><strong>SPHINCS+ :</strong> Algorithme de signature basé sur les hachages, servant d'alternative avec des fondements différents</li>
+                </ul>
+                <p>
+                    D'autres candidats sont encore en évaluation pour diversifier les options et assurer une redondance en cas de découverte de vulnérabilités.
+                </p>
+            </section>
+            
+            <section id="transition-post-quantique">
+                <h2>5. Stratégie de transition vers le post-quantique</h2>
+                
+                <h3>5.1 Défis de la transition</h3>
+                <p>
+                    La migration vers la cryptographie post-quantique présente plusieurs défis significatifs :
+                </p>
+                <ul>
+                    <li><strong>Performances :</strong> Les algorithmes PQC ont généralement des exigences plus élevées en termes de calcul, de mémoire et de bande passante</li>
+                    <li><strong>Compatibilité :</strong> Les systèmes existants doivent être adaptés pour supporter les nouveaux algorithmes</li>
+                    <li><strong>Maturité :</strong> Les nouveaux algorithmes n'ont pas le même niveau d'analyse et de confiance que les standards actuels</li>
+                    <li><strong>Gestion de la transition :</strong> Nécessité de supporter à la fois les algorithmes classiques et post-quantiques pendant une période</li>
+                </ul>
+                <p>
+                    Ces défis nécessitent une approche progressive et bien planifiée pour assurer une transition sans compromettre la sécurité ou la fonctionnalité.
+                </p>
+                
+                <h3>5.2 Approche hybride</h3>
+                <p>
+                    Une stratégie recommandée est l'utilisation d'approches hybrides combinant algorithmes classiques et post-quantiques :
+                </p>
+                <ul>
+                    <li><strong>Cryptographie hybride :</strong> Utilisation simultanée d'algorithmes classiques (comme ECDH) et post-quantiques (comme Kyber)</li>
+                    <li><strong>Compositions :</strong> Combinaison des résultats de manière à ce que la sécurité globale dépende de la robustesse du plus fort des deux systèmes</li>
+                </ul>
+                <p>
+                    Cette approche permet une transition progressive tout en maintenant la compatibilité avec les systèmes existants et en offrant une protection immédiate contre les menaces quantiques futures.
+                </p>
+                
+                <h3>5.3 Recommandations concrètes pour TeaRoom</h3>
+                <p>
+                    Pour préparer l'application TeaRoom à l'ère quantique, nous recommandons les actions suivantes :
+                </p>
+                <ol>
+                    <li><strong>Inventaire cryptographique :</strong> Documenter tous les usages de cryptographie dans l'application, avec une attention particulière aux mécanismes asymétriques</li>
+                    <li><strong>Évaluation des risques temporels :</strong> Évaluer la durée pendant laquelle les données actuelles doivent rester protégées (certaines données sensibles pourraient nécessiter une protection de plusieurs décennies)</li>
+                    <li><strong>Adoption d'une architecture crypto-agile :</strong> Modifier l'architecture pour permettre le remplacement facile des algorithmes cryptographiques sans changements majeurs dans l'application</li>
+                    <li><strong>Mise en œuvre progressive :</strong>
+                        <ul>
+                            <li>Court terme (1-2 ans) : Augmenter les tailles de clés symétriques à 256 bits minimum, préparer l'infrastructure pour la crypto-agilité</li>
+                            <li>Moyen terme (2-3 ans) : Implémenter des solutions hybrides pour TLS et les signatures</li>
+                            <li>Long terme (3-5 ans) : Migration complète vers des standards PQC pour toutes les opérations cryptographiques critiques</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>
+                    Cette approche échelonnée permettra à TeaRoom de se préparer adéquatement à la menace quantique tout en maintenant un équilibre entre sécurité, performance et compatibilité.
+                </p>
+            </section>
+            
+            <section id="cas-usage-pqc">
+                <h2>6. Cas d'usage pratiques de la cryptographie post-quantique</h2>
+                
+                <h3>6.1 Sécurisation de l'authentification</h3>
+                <p>
+                    L'authentification est un domaine critique qui nécessitera une adaptation aux menaces quantiques :
+                </p>
+                <ul>
+                    <li><strong>Signatures numériques :</strong> Remplacer les algorithmes de signature basés sur RSA ou ECDSA par des alternatives post-quantiques comme Dilithium ou SPHINCS+</li>
+                    <li><strong>Stockage des mots de passe :</strong> Continuer à utiliser des algorithmes de dérivation de clé robustes comme Argon2 avec des paramètres renforcés</li>
+                    <li><strong>Certificats :</strong> Préparer la migration vers des certificats X.509 utilisant des algorithmes post-quantiques</li>
+                </ul>
+                <p>
+                    Ces modifications permettront de maintenir l'intégrité des mécanismes d'authentification face aux capacités des ordinateurs quantiques.
+                </p>
+                
+                <h3>6.2 Communications sécurisées</h3>
+                <p>
+                    Les communications sécurisées sont particulièrement vulnérables aux attaques "récolter maintenant, déchiffrer plus tard" :
+                </p>
+                <ul>
+                    <li><strong>TLS post-quantique :</strong> Adoption de versions de TLS supportant les algorithmes hybrides ou post-quantiques</li>
+                    <li><strong>VPN :</strong> Migration vers des solutions VPN intégrant des mécanismes d'échange de clés post-quantiques</li>
+                    <li><strong>API sécurisées :</strong> Mise à jour des mécanismes d'authentification API pour utiliser des signatures post-quantiques</li>
+                </ul>
+                <p>
+                    Google, Cloudflare et d'autres acteurs majeurs expérimentent déjà avec des versions post-quantiques de TLS, montrant la voie pour ces adaptations.
+                </p>
+                
+                <h3>6.3 Protection des données à long terme</h3>
+                <p>
+                    Pour les données qui doivent rester confidentielles pendant des décennies :
+                </p>
+                <ul>
+                    <li><strong>Chiffrement à repos :</strong> Utiliser des algorithmes hybrides combinant des clés symétriques renforcées (AES-256) avec des mécanismes de gestion de clés post-quantiques</li>
+                    <li><strong>Archives sécurisées :</strong> Rechiffrer périodiquement les archives avec les standards cryptographiques les plus récents</li>
+                    <li><strong>Signatures à long terme :</strong> Implémenter des mécanismes de re-signature périodique ou des preuves d'horodatage pour maintenir la validité des signatures</li>
+                </ul>
+                <p>
+                    Ces mesures sont essentielles pour les données médicales, financières ou personnelles qui nécessitent une protection au-delà de l'horizon d'arrivée des ordinateurs quantiques puissants.
+                </p>
+            </section>
+            
+            <section id="etat-actuel-technologie">
+                <h2>7. État actuel de la technologie quantique</h2>
+                
+                <h3>7.1 Progrès récents en informatique quantique</h3>
+                <p>
+                    L'informatique quantique connaît des avancées rapides, mais reste confrontée à des défis significatifs :
+                </p>
+                <ul>
+                    <li><strong>Nombre de qubits :</strong> Les systèmes les plus avancés atteignent aujourd'hui environ 100-1000 qubits physiques, mais avec des taux d'erreur élevés</li>
+                    <li><strong>Qualité des qubits :</strong> Les taux d'erreur des qubits actuels nécessitent d'importantes ressources pour la correction d'erreurs</li>
+                    <li><strong>Démonstrations :</strong> Plusieurs algorithmes quantiques ont été démontrés à petite échelle, mais pas encore avec une taille suffisante pour menacer la cryptographie actuelle</li>
+                </ul>
+                <p>
+                    Les estimations actuelles suggèrent qu'un ordinateur quantique capable de casser RSA-2048 nécessiterait plusieurs millions de qubits physiques ou plusieurs milliers de qubits logiques de haute qualité.
+                </p>
+                
+                <h3>7.2 Horizon temporel estimé</h3>
+                <p>
+                    Les experts proposent différentes estimations quant à l'arrivée d'ordinateurs quantiques cryptographiquement pertinents :
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Scénario</th>
+                            <th>Horizon temporel estimé</th>
+                            <th>Probabilité</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conservateur</td>
+                            <td>15-30 ans</td>
+                            <td>Élevée</td>
+                            <td>Temps suffisant pour une transition complète</td>
+                        </tr>
+                        <tr>
+                            <td>Intermédiaire</td>
+                            <td>7-15 ans</td>
+                            <td>Moyenne</td>
+                            <td>Nécessité d'accélérer les efforts de transition</td>
+                        </tr>
+                        <tr>
+                            <td>Accéléré</td>
+                            <td>5-10 ans</td>
+                            <td>Faible</td>
+                            <td>Risque significatif pour les systèmes non préparés</td>
+                        </tr>
+                        <tr>
+                            <td>Percée majeure</td>
+                            <td>< 5 ans</td>
+                            <td>Très faible</td>
+                            <td>Perturbation majeure de l'écosystème cryptographique</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    Ces estimations sont régulièrement révisées à mesure que la technologie évolue. La prudence suggère de se préparer même dans l'hypothèse conservatrice, étant donné les enjeux de sécurité.
+                </p>
+            </section>
+            
+            <section id="conclusion">
+                <h2>8. Conclusion</h2>
+                <p>
+                    L'avènement de l'informatique quantique représente à la fois un défi majeur et une opportunité pour repenser la sécurité des systèmes d'information. Bien que les ordinateurs quantiques suffisamment puissants pour compromettre les cryptosystèmes actuels ne soient pas imminents, la préparation doit commencer dès maintenant, particulièrement pour les systèmes traitant des données sensibles à long terme.
+                </p>
+                <p>
+                    Pour TeaRoom: Shadows, cette préparation prend la forme d'une stratégie progressive visant à :
+                </p>
+                <ul>
+                    <li>Comprendre et documenter l'utilisation actuelle de la cryptographie dans l'application</li>
+                    <li>Implémenter une architecture crypto-agile facilitant les transitions futures</li>
+                    <li>Adopter des approches hybrides combinant cryptographie classique et post-quantique</li>
+                    <li>Suivre activement les développements dans la standardisation des algorithmes post-quantiques</li>
+                </ul>
+                <p>
+                    Cette démarche proactive permettra non seulement de préparer TeaRoom aux défis de l'ère quantique, mais aussi d'assurer une posture de sécurité robuste face à l'évolution continue des menaces cryptographiques conventionnelles.
+                </p>
+                <p>
+                    En définitive, la transition vers le post-quantique ne doit pas être perçue uniquement comme une contrainte, mais comme une opportunité de renforcer globalement la sécurité des systèmes et d'adopter les meilleures pratiques cryptographiques contemporaines.
+                </p>
+            </section>
+            
+            <!-- Navigation entre documents -->
+            <div class="document-navigation">
+                <a href="securite-recommandations.html" class="prev-doc">← Document précédent: Sécurité et Recommandations</a>
+                <a href="index.html" class="next-doc">Retour à l'accueil →</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Bouton de retour en haut de page -->
+    <button id="back-to-top" aria-label="Retour en haut de page">↑</button>
+    
+    <footer>
+        <p>&copy; 2025 TeaRoom: Shadows - Bachelor 1 Cybersécurité</p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/theme-switcher.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/toc-generator.js"></script>
+    <script src="js/print.js"></script>
+    <script src="vendor/prism.js"></script>
+    <script src="js/MathJax.js"></script>
+    <!-- <script src="js/scroll-spy.js"></script> -->
+    
+    <!-- Script pour la barre de progression -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressIndicator = document.querySelector('.progress-indicator');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                
+                progressIndicator.style.width = scrollPercent + '%';
+            });
+        });
+    </script>
+</body>
+</html> 
